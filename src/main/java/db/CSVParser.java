@@ -4,13 +4,17 @@ import com.opencsv.CSVReader;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class CSVParser {
     public static void main(String[] args) {
-        ConnectionDB.getConnection();
+        //connection and creation
+        Connection conn = ConnectionDB.getConnection();
+        CreationDB.createDB(conn);
+
         List<List<String>> records = new ArrayList<List<String>>();
         try (CSVReader csvReader = new CSVReader(new FileReader("sample_data.csv"));) {
             String[] values = null;
