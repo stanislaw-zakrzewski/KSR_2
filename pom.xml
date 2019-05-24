@@ -44,6 +44,12 @@
             <artifactId>javafx-web</artifactId>
             <version>13-ea+8</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.opencsv/opencsv -->
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>4.0</version>
+        </dependency>
     </dependencies>
     
 </project>
