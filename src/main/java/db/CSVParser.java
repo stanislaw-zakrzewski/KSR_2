@@ -30,7 +30,7 @@ public class CSVParser {
         System.out.println(records.size());
         System.out.println("oko");
 
-        InsertionDB ins = new InsertionDB();
+        InsertionDB ins = InsertionDB.getInstance();
 
         if(ins.insertDB(conn, records)) {
             System.out.println("YAAS");

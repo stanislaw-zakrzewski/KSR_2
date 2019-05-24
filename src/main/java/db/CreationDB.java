@@ -1,14 +1,13 @@
 package db;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class CreationDB {
 
     public static Boolean createDB(Connection connection) {
         if (connection != null) {
             PreparedStatement ps = null;
+            checkAndDrop(connection);
             try {
                 ps = connection.prepareStatement("CREATE TABLE IF NOT EXISTS flights(" +
                         "flight_id SERIAL NOT NULL PRIMARY KEY," +
@@ -44,6 +43,20 @@ public class CreationDB {
             return true;
         } else {
             return false;
+        }
+    }
+
+    private static void checkAndDrop(Connection connection) {
+        if (connection != null) {
+            PreparedStatement ps = null;
+            try {
+                ps = connection.prepareStatement("DROP TABLE IF EXISTS flights");
+                ps.executeUpdate();
+                ps.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 }

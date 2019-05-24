@@ -7,10 +7,18 @@ import java.sql.Types;
 import java.util.List;
 
 public class InsertionDB {
-    static KeyFactory keyFactory;
+    private static InsertionDB instance;
+    private static KeyFactory keyFactory;
 
-    public InsertionDB() {
+    private InsertionDB() {
         keyFactory = KeyFactory.getInstance();
+    }
+
+    public static InsertionDB getInstance() {
+        if (instance == null) {
+            instance = new InsertionDB();
+        }
+        return instance;
     }
 
     public Boolean insertDB(Connection connection, List<List<String>> records) {
