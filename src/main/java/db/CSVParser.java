@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CSVParser {
     public static void main(String[] args) {
-        //connection and creation
+
         Connection conn = ConnectionDB.getConnection();
         CreationDB.createDB(conn);
 
@@ -29,5 +29,13 @@ public class CSVParser {
         }
         System.out.println(records.size());
         System.out.println("oko");
+
+        InsertionDB ins = new InsertionDB();
+
+        if(ins.insertDB(conn, records)) {
+            System.out.println("YAAS");
+        } else {
+            System.out.println("NOPE");
+        }
     }
 }
