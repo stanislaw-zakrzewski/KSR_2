@@ -15,12 +15,12 @@ public class CSVParser {
         Connection conn = ConnectionDB.getConnection();
         CreationDB.createDB(conn);
 
-        List<List<String>> records = new ArrayList<List<String>>();
-        try (CSVReader csvReader = new CSVReader(new FileReader("sample_data.csv"));) {
-            String[] values = null;
+        List<List<String>> records = new ArrayList<>();
+        try (CSVReader csvReader = new CSVReader(new FileReader("sample_data.csv"))) {
+            String[] values;
             while ((values = csvReader.readNext()) != null) {
                 List<String> row = Arrays.asList(values);
-                if(!row.get(10).equals("1.00")) {
+                if(row.get(10).equals("1.00") || row.get(12).equals("1.00")) {
                     records.add(row);
                 }
             }
@@ -28,7 +28,6 @@ public class CSVParser {
             e.printStackTrace();
         }
         System.out.println(records.size());
-        System.out.println("oko");
 
         InsertionDB ins = InsertionDB.getInstance();
 
