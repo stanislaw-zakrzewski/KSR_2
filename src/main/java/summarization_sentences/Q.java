@@ -1,22 +1,31 @@
 package summarization_sentences;
 
+import java.util.List;
+import java.util.Map;
+
 /***
  * Pełni rolę kwantyfikatora lingwistycznego w podsumowaniach
  */
 public class Q {
-    private String value;
-    private float proportion;
+    private String L;
+    private List<String> H;
+    private Map<String, DegreeOfMembership> M;
 
-    public Q(String value, float proportion) {
-        this.value = value;
-        this.proportion = proportion;
+    public Q(String value, List<String> H, Map<String, DegreeOfMembership> M) {
+        this.L = value;
+        this.H = H;
+        this.M = M;
     }
 
-    public String getValue() {
-        return value;
+    public String getL() {
+        return L;
     }
 
-    public float getProportion() {
-        return proportion;
+    public List<String> getH() {
+        return H;
+    }
+
+    public Map<String, DegreeOfMembership> getM() {
+        return M;
     }
 }

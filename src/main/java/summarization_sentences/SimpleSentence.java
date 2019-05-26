@@ -8,17 +8,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class SimpleSentence {
-    private Q q;
+    private DegreeOfMembership degreeOfMembership;
     private P p;
     private S s;
     private List<Float> values;
 
-    public SimpleSentence(Q q, P p, S s) {
-        this.q = q;
+    public SimpleSentence(DegreeOfMembership degreeOfMembership, P p, S s) {
+        this.degreeOfMembership = degreeOfMembership;
         this.p = p;
         this.s = s;
         values = new ArrayList<>();
@@ -39,17 +38,12 @@ public class SimpleSentence {
     public float finalValue() {
         float[] values2 = ArrayUtils.toPrimitive(values.toArray(new Float[0]), 0.0F);
         Arrays.sort(values2);
-        int size = (int) (values2.length * q.getProportion());
         int ret = 0;
 
-        for(int i = 0; i < values2.length; i++) {
-            if(i < values2.length - size) {
-                ret += 1 - values2[i];
-            }
-            else {
-                ret += values2[i];
-            }
+        for (float v : values2) {
+            ret += v;
         }
-        return (float)ret / (float)values2.length;
+        float f = degreeOfMembership.getValue((float) ret / (float) values2.length);
+        return f;
     }
 }

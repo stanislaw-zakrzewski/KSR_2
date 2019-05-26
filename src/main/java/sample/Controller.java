@@ -2,24 +2,30 @@ package sample;
 
 import db.ConnectionDB;
 import helpers.DelayFunction;
+import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import summarization_sentences.P;
-import summarization_sentences.Q;
-import summarization_sentences.S;
-import summarization_sentences.SimpleSentence;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import summarization_sentences.*;
 
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Controller implements Initializable {
+    private final ObservableList<Sentence> data = FXCollections.observableArrayList();
+
+    ObservableList<String> qList;
+    ObservableList<String> pList;
+    ObservableList<String> sList;
 
     @FXML
     public ComboBox<String> qComboBox;
@@ -29,17 +35,20 @@ public class Controller implements Initializable {
     public ComboBox<String> sComboBox;
 
     @FXML
-    public Label sentence;
+    public TableView<Sentence> sentences;
+    public TableColumn<Sentence, String> sentence;
+    public TableColumn<Sentence, Float> accuracy;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        ObservableList<String> qList = FXCollections.observableArrayList("mało", "dużo");
+        qList = FXCollections.observableArrayList("mało", "dużo");
 
-        ObservableList<String> pList = FXCollections.observableArrayList();
+        pList = FXCollections.observableArrayList();
         try {
             Statement st = ConnectionDB.getConnection().createStatement();
             ResultSet rs = st.executeQuery("select distinct origin_state_name from flights;");
+            pList.add("------");
             while (rs.next()) {
                 pList.add(rs.getString("origin_state_name"));
             }
@@ -47,31 +56,74 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
 
-        ObservableList<String> sList = FXCollections.observableArrayList("na czas", "spóźniony", "bardzo spóźniony");
+        sList = FXCollections.observableArrayList("na czas", "spóźniony", "bardzo spóźniony");
 
-        qComboBox.setValue("Select value");
+        qComboBox.setValue("mało");
         qComboBox.setItems(qList);
-        pComboBox.setValue("Select value");
+        pComboBox.setValue("------");
         pComboBox.setItems(pList);
-        sComboBox.setValue("Select value");
+        sComboBox.setValue("na czas");
         sComboBox.setItems(sList);
+
+        sentence.setCellValueFactory(new PropertyValueFactory<>("sentence"));
+        accuracy.setCellValueFactory(new PropertyValueFactory<>("accuracy"));
     }
 
     public void getSentence() {
-        Q q = null;
-        switch(qComboBox.getValue()) {
-            case "mało":
-                q = new Q("mało", 0.3f);
-                break;
-            case "dużo":
-                q = new Q("dużo", 0.7f);
-                break;
+        Q q;
+        P p;
+        S s;
+        SimpleSentence simpleSentence;
+
+        data.clear();
+
+        List<String> H = Arrays.asList("mało", "dużo");
+        Map<String, DegreeOfMembership> M = new HashMap<>();
+        M.put(H.get(0), new DegreeOfMembershipSpike(0.3f, 0.6f));
+        M.put(H.get(1), new DegreeOfMembershipSpike(0.7f, 0.6f));
+        q = new Q("jak dużo", H, M);
+
+        s = new S("dep_delay", sComboBox.getValue(), new DelayFunction());
+
+        if (pComboBox.getValue().equals("------")) {
+            for (int i = 1; i < pList.size(); i++) {
+                p = new P("origin_state_name", pList.get(i));
+                simpleSentence = new SimpleSentence(q.getM().get(qComboBox.getValue()), p, s);
+                simpleSentence.CalculateValues();
+                data.add(new Sentence(qComboBox.getValue() + " lotów do " + p.getValue() + " było " + s.getSelectedWord(), simpleSentence.finalValue()));
+            }
+        } else {
+            p = new P("origin_state_name", pComboBox.getValue());
+            simpleSentence = new SimpleSentence(q.getM().get(qComboBox.getValue()), p, s);
+            simpleSentence.CalculateValues();
+            data.add(new Sentence(qComboBox.getValue() + " lotów do " + p.getValue() + " było " + s.getSelectedWord(), simpleSentence.finalValue()));
         }
-        P p = new P("origin_state_name", pComboBox.getValue());
-        S s = new S("dep_delay", sComboBox.getValue(), new DelayFunction());
-        SimpleSentence simpleSentence = new SimpleSentence(q,p,s);
-        simpleSentence.CalculateValues();
-        assert q != null;
-        sentence.setText(q.getValue() + " lotów do " + p.getValue() + " było " + s.getSelectedWord() + ".     [" + simpleSentence.finalValue() + "]");
+        sentences.setItems(data);
+    }
+
+    public static class Sentence {
+        private final SimpleStringProperty sentence;
+        private final SimpleFloatProperty accuracy;
+
+        private Sentence(String sentence, float accuracy) {
+            this.sentence = new SimpleStringProperty(sentence);
+            this.accuracy = new SimpleFloatProperty(accuracy);
+        }
+
+        public String getSentence() {
+            return sentence.get();
+        }
+
+        public void setSentence(String newSentence) {
+            sentence.set(newSentence);
+        }
+
+        public float getAccuracy() {
+            return accuracy.floatValue();
+        }
+
+        public void setAccuracy(float newAccuracy) {
+            accuracy.set(newAccuracy);
+        }
     }
 }
