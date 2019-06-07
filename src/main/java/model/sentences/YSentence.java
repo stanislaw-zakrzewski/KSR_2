@@ -1,26 +1,41 @@
 package model.sentences;
 
+import lombok.Getter;
+import model.FuzzySet;
+import model.linguistic_variables.LinguisticVariable;
 import model.linguistic_quantifiers.LinguisticQuantifier;
-import model.qualifiers.Qualifier;
+
+import java.util.List;
 
 public class YSentence implements Sentence {
-    private Qualifier q;
-    private LinguisticQuantifier s;
+    @Getter
+    private LinguisticQuantifier q;
+    @Getter
+    private LinguisticVariable s;
+    private String sLabel;
+    private FuzzySet sFuzzySet;
 
-    public Qualifier getQ() {
-        return q;
-    }
-
-    public void setQ(Qualifier q) {
+    public YSentence(LinguisticQuantifier q, LinguisticVariable s, String sLabel) {
         this.q = q;
-    }
-
-    public LinguisticQuantifier getS() {
-        return s;
-    }
-
-    public void setS(LinguisticQuantifier s) {
         this.s = s;
+        this.sLabel = sLabel;
+    }
+
+    public void process(List<Float> x) {
+        if(sFuzzySet == null) {
+            sFuzzySet = new FuzzySet(s.getMembershipFunctionForLabel(sLabel));
+            for(Float f : x) {
+                sFuzzySet.addValue(f);
+            }
+        }
+    }
+
+    public float getSCardinality() {
+        return sFuzzySet.getCardinality();
+    }
+
+    public float getSSize() {
+        return sFuzzySet.getSize();
     }
 
     @Override
@@ -30,6 +45,6 @@ public class YSentence implements Sentence {
 
     @Override
     public String toString() {
-        return "";
+        return q.getName() + " lotów jest " + sLabel;
     }
 }

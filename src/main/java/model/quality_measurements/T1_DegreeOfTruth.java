@@ -13,6 +13,7 @@ public class T1_DegreeOfTruth implements QualityMeasurement {
         switch (sentence.getType()) {
             case Y:
                 YSentence ySentence = (YSentence)sentence;
+                value = ySentence.getQ().calculateMembership(ySentence.getSCardinality()/ySentence.getSSize());
                 break;
             case K:
                 KSentence kSentence = (KSentence)sentence;

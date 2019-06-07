@@ -1,10 +1,12 @@
 package model;
 
+import lombok.Getter;
 import model.membership_functions.MembershipFunction;
 
 import java.util.LinkedList;
 
 public class FuzzySet {
+    @Getter
     private LinkedList<FuzzyPair> fuzzySet;
     private MembershipFunction membershipFunction;
 
@@ -17,7 +19,15 @@ public class FuzzySet {
         fuzzySet.add(new FuzzyPair(value, membershipFunction.calculateMembership(value)));
     }
 
-    public LinkedList<FuzzyPair> getFuzzySet() {
-        return fuzzySet;
+    public float getCardinality() {
+        float cardinality = 0;
+        for(FuzzyPair fp : fuzzySet) {
+            cardinality += fp.getMembership();
+        }
+        return cardinality;
+    }
+
+    public int getSize() {
+        return fuzzySet.size();
     }
 }

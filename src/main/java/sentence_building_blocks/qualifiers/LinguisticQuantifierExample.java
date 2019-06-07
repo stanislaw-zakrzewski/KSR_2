@@ -1,17 +1,18 @@
 package sentence_building_blocks.qualifiers;
 
 import model.membership_functions.MembershipFunction;
-import model.qualifiers.Qualifier;
+import model.linguistic_quantifiers.LinguisticQuantifier;
 
-public class QualifierExample implements Qualifier {
+public class LinguisticQuantifierExample implements LinguisticQuantifier {
     private String name;
     private MembershipFunction membershipFunction;
 
-    public QualifierExample(String name, MembershipFunction membershipFunction) {
+    public LinguisticQuantifierExample(String name, MembershipFunction membershipFunction) {
         this.name = name;
         this.membershipFunction = membershipFunction;
     }
 
+    @Override
     public String getName() {
         return name;
     }

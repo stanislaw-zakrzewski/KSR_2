@@ -1,43 +1,52 @@
 package sample;
 
 import db.ConnectionDB;
-import helpers.DelayFunction;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 import model.linguistic_quantifiers.LinguisticQuantifier;
-import model.qualifiers.Qualifier;
-import model.sentences.Sentence;
+import model.linguistic_variables.LinguisticVariable;
+import model.quality_measurements.T1_DegreeOfTruth;
 import model.sentences.YSentence;
-import sentence_building_blocks.linguistic_quantifiers.LinguisticQuantifierExample;
-import sentence_building_blocks.qualifiers.QualifierExample;
+import sentence_building_blocks.linguistic_variables.AllLinguisticVariables;
+import sentence_building_blocks.qualifiers.AllLinguisticQuantifiers;
 
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class Controller implements Initializable {
     private final ObservableList<ViewSentence> data = FXCollections.observableArrayList();
 
-    ObservableList<String> qList;
-    ObservableList<String> pList;
-    ObservableList<String> sList;
+    private AllLinguisticQuantifiers allLinguisticQuantifiers = new AllLinguisticQuantifiers();
+    private AllLinguisticVariables allLinguisticVariables = new AllLinguisticVariables();
+
+    private List<String> selectedLinguisticQuantifiers = new LinkedList<>();
+    private List<String> selectedLinguisticVariables = new LinkedList<>();
 
     @FXML
-    public ComboBox<String> qComboBox;
+    public ListView<String> qListView;
     @FXML
-    public ComboBox<String> pComboBox;
+    public ListView<String> wListView;
     @FXML
-    public ComboBox<String> sComboBox;
+    public ListView<String> sListView;
 
     @FXML
     public TableView<ViewSentence> sentences;
@@ -47,62 +56,78 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        qList = FXCollections.observableArrayList("mało", "dużo");
-
-        pList = FXCollections.observableArrayList();
-        try {
-            Statement st = ConnectionDB.getConnection().createStatement();
-            ResultSet rs = st.executeQuery("select distinct origin_state_name from flights;");
-            pList.add("------");
-            while (rs.next()) {
-                pList.add(rs.getString("origin_state_name"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        sList = FXCollections.observableArrayList("na czas", "spóźniony", "bardzo spóźniony");
-
-        qComboBox.setValue("mało");
-        qComboBox.setItems(qList);
-        pComboBox.setValue("------");
-        pComboBox.setItems(pList);
-        sComboBox.setValue("na czas");
-        sComboBox.setItems(sList);
 
         sentence.setCellValueFactory(new PropertyValueFactory<>("sentence"));
         accuracy.setCellValueFactory(new PropertyValueFactory<>("accuracy"));
+
+        for(LinguisticQuantifier lq : allLinguisticQuantifiers.getLinguisticQuantifiers()) {
+            qListView.getItems().add(lq.getName());
+        }
+
+        for(LinguisticVariable lv : allLinguisticVariables.getLinguisticVariables()) {
+            sListView.getItems().add(lv.getName());
+        }
+        setObserver(qListView, selectedLinguisticQuantifiers);
+
+        wListView.setCellFactory(CheckBoxListCell.forListView(new Callback<String, ObservableValue<Boolean>>() {
+            @Override
+            public ObservableValue<Boolean> call(String item) {
+                BooleanProperty observable = new SimpleBooleanProperty();
+                observable.addListener((obs, wasSelected, isNowSelected) ->
+                        System.out.println("LinguisticQuantifier check box for "+item+" changed from "+wasSelected+" to "+isNowSelected)
+                );
+                return observable ;
+            }
+        }));
+
+        setObserver(sListView, selectedLinguisticVariables);
     }
 
     public void getSentence() {
-        Qualifier q = new QualifierExample();
-        LinguisticQuantifier s = new LinguisticQuantifierExample();
-        Sentence ySentence = new YSentence();
-
         data.clear();
 
-        List<String> H = Arrays.asList("mało", "dużo");
-        Map<String, DegreeOfMembership> M = new HashMap<>();
-        M.put(H.get(0), new DegreeOfMembershipSpike(0.3f, 0.6f));
-        M.put(H.get(1), new DegreeOfMembershipSpike(0.7f, 0.6f));
-        q = new Q("jak dużo", H, M);
+        for(LinguisticQuantifier q : allLinguisticQuantifiers.getLinguisticQuantifiers().stream().filter(q -> selectedLinguisticQuantifiers.contains(q.getName())).collect(Collectors.toList())) {
+            for(LinguisticVariable s : allLinguisticVariables.getLinguisticVariables().stream().filter(s -> selectedLinguisticVariables.contains(s.getName())).collect(Collectors.toList())) {
+                for(String label : s.getLabels()) {
+                    YSentence ySentence = new YSentence(q,s,label);
 
-        s = new S("dep_delay", sComboBox.getValue(), new DelayFunction());
+                    List<Float> x = new LinkedList<>();
 
-        if (pComboBox.getValue().equals("------")) {
-            for (int i = 1; i < pList.size(); i++) {
-                p = new P("origin_state_name", pList.get(i));
-                simpleSentence = new SimpleSentence(q.getM().get(qComboBox.getValue()), p, s);
-                simpleSentence.CalculateValues();
-                data.add(new ViewSentence(qComboBox.getValue() + " lotów do " + p.getValue() + " było " + s.getSelectedWord(), simpleSentence.finalValue()));
+                    try {
+                        Statement st = ConnectionDB.getConnection().createStatement();
+                        ResultSet rs = st.executeQuery("select " + s.getColumn() + " from flights");
+                        while (rs.next()) {
+                            x.add(rs.getFloat(s.getColumn()));
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+
+                    ySentence.process(x);
+
+
+                    T1_DegreeOfTruth degreeOfTruth = new T1_DegreeOfTruth();
+                    data.add(new ViewSentence(ySentence.toString(), degreeOfTruth.calculateValue(ySentence)));
+                }
             }
-        } else {
-            p = new P("origin_state_name", pComboBox.getValue());
-            simpleSentence = new SimpleSentence(q.getM().get(qComboBox.getValue()), p, s);
-            simpleSentence.CalculateValues();
-            data.add(new ViewSentence(qComboBox.getValue() + " lotów do " + p.getValue() + " było " + s.getSelectedWord(), simpleSentence.finalValue()));
         }
         sentences.setItems(data);
+    }
+
+    private void setObserver(ListView<String> listView, List<String> selectedItems) {
+        listView.setCellFactory(CheckBoxListCell.forListView(item -> {
+            BooleanProperty observable = new SimpleBooleanProperty();
+            observable.addListener((obs, wasSelected, isNowSelected) ->
+                    {
+                        if(isNowSelected) {
+                            selectedItems.add(item);
+                        } else {
+                            selectedItems.remove(item);
+                        }
+                    }
+            );
+            return observable ;
+        }));
     }
 
     public static class ViewSentence {
