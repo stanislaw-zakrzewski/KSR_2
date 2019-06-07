@@ -21,10 +21,18 @@ public class FuzzySet {
 
     public float getCardinality() {
         float cardinality = 0;
-        for(FuzzyPair fp : fuzzySet) {
+        for (FuzzyPair fp : fuzzySet) {
             cardinality += fp.getMembership();
         }
         return cardinality;
+    }
+
+    public float getSupp() {
+        int supp = 0;
+        for (FuzzyPair fp : fuzzySet) {
+            if (fp.getMembership() > 0) supp++;
+        }
+        return supp;
     }
 
     public int getSize() {

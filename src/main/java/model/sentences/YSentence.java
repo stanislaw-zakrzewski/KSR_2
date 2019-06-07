@@ -34,6 +34,12 @@ public class YSentence implements Sentence {
         return sFuzzySet.getCardinality();
     }
 
+    public float getQSupp() {return q.getSupp();}
+
+    public float getQSize() {return q.getSize();}
+
+    public float getSSupp() { return sFuzzySet.getSupp();}
+
     public float getSSize() {
         return sFuzzySet.getSize();
     }

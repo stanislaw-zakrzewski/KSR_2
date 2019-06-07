@@ -5,7 +5,6 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,10 +14,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 import model.linguistic_quantifiers.LinguisticQuantifier;
 import model.linguistic_variables.LinguisticVariable;
-import model.quality_measurements.T1_DegreeOfTruth;
+import model.quality_measurements.*;
 import model.sentences.YSentence;
 import sentence_building_blocks.linguistic_variables.AllLinguisticVariables;
 import sentence_building_blocks.qualifiers.AllLinguisticQuantifiers;
@@ -69,15 +67,12 @@ public class Controller implements Initializable {
         }
         setObserver(qListView, selectedLinguisticQuantifiers);
 
-        wListView.setCellFactory(CheckBoxListCell.forListView(new Callback<String, ObservableValue<Boolean>>() {
-            @Override
-            public ObservableValue<Boolean> call(String item) {
-                BooleanProperty observable = new SimpleBooleanProperty();
-                observable.addListener((obs, wasSelected, isNowSelected) ->
-                        System.out.println("LinguisticQuantifier check box for "+item+" changed from "+wasSelected+" to "+isNowSelected)
-                );
-                return observable ;
-            }
+        wListView.setCellFactory(CheckBoxListCell.forListView(item -> {
+            BooleanProperty observable = new SimpleBooleanProperty();
+            observable.addListener((obs, wasSelected, isNowSelected) ->
+                    System.out.println("LinguisticQuantifier check box for "+item+" changed from "+wasSelected+" to "+isNowSelected)
+            );
+            return observable ;
         }));
 
         setObserver(sListView, selectedLinguisticVariables);
@@ -85,6 +80,15 @@ public class Controller implements Initializable {
 
     public void getSentence() {
         data.clear();
+
+        List<QualityMeasurement> qualityMeasurementsTypeOne = new LinkedList<>();
+        qualityMeasurementsTypeOne.add(new T1_DegreeOfTruth());
+        qualityMeasurementsTypeOne.add(new T2_DegreeOfImprecision());
+        qualityMeasurementsTypeOne.add(new T4_DegreeOfAppropriatness());
+        qualityMeasurementsTypeOne.add(new T5_DegreeOfSummarizersCount());
+        qualityMeasurementsTypeOne.add(new T6_DegreeOfQuantifierImprecision());
+        qualityMeasurementsTypeOne.add(new T7_DegreeOfQuantifierCardinality());
+        qualityMeasurementsTypeOne.add(new T8_DegreeOfSummarizerCardinality());
 
         for(LinguisticQuantifier q : allLinguisticQuantifiers.getLinguisticQuantifiers().stream().filter(q -> selectedLinguisticQuantifiers.contains(q.getName())).collect(Collectors.toList())) {
             for(LinguisticVariable s : allLinguisticVariables.getLinguisticVariables().stream().filter(s -> selectedLinguisticVariables.contains(s.getName())).collect(Collectors.toList())) {
@@ -105,9 +109,13 @@ public class Controller implements Initializable {
 
                     ySentence.process(x);
 
+                    float quality = 0;
+                    for(QualityMeasurement qm : qualityMeasurementsTypeOne) {
+                        quality+= qm.calculateValue(ySentence);
+                    }
+                    quality/=qualityMeasurementsTypeOne.size();
 
-                    T1_DegreeOfTruth degreeOfTruth = new T1_DegreeOfTruth();
-                    data.add(new ViewSentence(ySentence.toString(), degreeOfTruth.calculateValue(ySentence)));
+                    data.add(new ViewSentence(ySentence.toString(), quality));
                 }
             }
         }
