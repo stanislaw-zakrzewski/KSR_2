@@ -12,7 +12,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import summarization_sentences.*;
+import model.linguistic_quantifiers.LinguisticQuantifier;
+import model.qualifiers.Qualifier;
+import model.sentences.Sentence;
+import model.sentences.YSentence;
+import sentence_building_blocks.linguistic_quantifiers.LinguisticQuantifierExample;
+import sentence_building_blocks.qualifiers.QualifierExample;
 
 import java.net.URL;
 import java.sql.ResultSet;
@@ -21,7 +26,7 @@ import java.sql.Statement;
 import java.util.*;
 
 public class Controller implements Initializable {
-    private final ObservableList<Sentence> data = FXCollections.observableArrayList();
+    private final ObservableList<ViewSentence> data = FXCollections.observableArrayList();
 
     ObservableList<String> qList;
     ObservableList<String> pList;
@@ -35,9 +40,9 @@ public class Controller implements Initializable {
     public ComboBox<String> sComboBox;
 
     @FXML
-    public TableView<Sentence> sentences;
-    public TableColumn<Sentence, String> sentence;
-    public TableColumn<Sentence, Float> accuracy;
+    public TableView<ViewSentence> sentences;
+    public TableColumn<ViewSentence, String> sentence;
+    public TableColumn<ViewSentence, Float> accuracy;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -70,10 +75,9 @@ public class Controller implements Initializable {
     }
 
     public void getSentence() {
-        Q q;
-        P p;
-        S s;
-        SimpleSentence simpleSentence;
+        Qualifier q = new QualifierExample();
+        LinguisticQuantifier s = new LinguisticQuantifierExample();
+        Sentence ySentence = new YSentence();
 
         data.clear();
 
@@ -90,22 +94,22 @@ public class Controller implements Initializable {
                 p = new P("origin_state_name", pList.get(i));
                 simpleSentence = new SimpleSentence(q.getM().get(qComboBox.getValue()), p, s);
                 simpleSentence.CalculateValues();
-                data.add(new Sentence(qComboBox.getValue() + " lotów do " + p.getValue() + " było " + s.getSelectedWord(), simpleSentence.finalValue()));
+                data.add(new ViewSentence(qComboBox.getValue() + " lotów do " + p.getValue() + " było " + s.getSelectedWord(), simpleSentence.finalValue()));
             }
         } else {
             p = new P("origin_state_name", pComboBox.getValue());
             simpleSentence = new SimpleSentence(q.getM().get(qComboBox.getValue()), p, s);
             simpleSentence.CalculateValues();
-            data.add(new Sentence(qComboBox.getValue() + " lotów do " + p.getValue() + " było " + s.getSelectedWord(), simpleSentence.finalValue()));
+            data.add(new ViewSentence(qComboBox.getValue() + " lotów do " + p.getValue() + " było " + s.getSelectedWord(), simpleSentence.finalValue()));
         }
         sentences.setItems(data);
     }
 
-    public static class Sentence {
+    public static class ViewSentence {
         private final SimpleStringProperty sentence;
         private final SimpleFloatProperty accuracy;
 
-        private Sentence(String sentence, float accuracy) {
+        private ViewSentence(String sentence, float accuracy) {
             this.sentence = new SimpleStringProperty(sentence);
             this.accuracy = new SimpleFloatProperty(accuracy);
         }
