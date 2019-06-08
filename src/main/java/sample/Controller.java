@@ -92,6 +92,9 @@ public class Controller implements Initializable {
         List<Boolean> selectedMeasurements = selectedQualityMeasurements.stream().map(CheckBox::isSelected).collect(Collectors.toList());
         MeasuringQualityOfSentences measuringQualityOfSentences = new MeasuringQualityOfSentences(selectedMeasurements);
 
+        for(YSentence ySentence : ySentences) {
+            data.add(new ViewSentence(ySentence.toString(), measuringQualityOfSentences.calculateQuality(ySentence)));
+        }
         for(GSentence gSentence : gSentences) {
             data.add(new ViewSentence(gSentence.toString(), measuringQualityOfSentences.calculateQuality(gSentence)));
         }
