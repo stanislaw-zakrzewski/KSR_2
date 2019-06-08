@@ -13,5 +13,11 @@ public class AllLinguisticVariables {
         linguisticVariables = new LinkedList<>();
         linguisticVariables.add(new LinguisticVariableExample());
         linguisticVariables.add(new LinguisticVariableExample2());
+        linguisticVariables.add(new DistanceLinguisticVariable());
+        linguisticVariables.add(new WeatherLinguisticVariable());
+        linguisticVariables.add(new AircraftLinguisticVariable());
+        linguisticVariables.add(new SecurityLinguisticVeriable());
+        linguisticVariables.add(new NASLinguisticVariable());
+        linguisticVariables.add(new CarrierLinguisticVariable());
     }
 }
