@@ -3,7 +3,6 @@ package model.linguistic_variables;
 import lombok.Setter;
 import model.FuzzySet;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -37,14 +36,13 @@ public class CombinationLinguisticVariable {
         }
     }
 
-    public List<String> getLabels() {
-        List<String> labels;
+    public List<FuzzySet> getFuzzySets() {
+        List<FuzzySet> fuzzySets;
         if(s == null) {
-            labels = a.getLabels();
-            labels.addAll(b.getLabels());
-            return labels;
+            fuzzySets = a.getFuzzySets();
+            fuzzySets.addAll(b.getFuzzySets());
         }
-        return Collections.singletonList(sLabel);
+        return Collections.singletonList(fuzzySet);
     }
 
     public FuzzySet getFuzzySet() {
