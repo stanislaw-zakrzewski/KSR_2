@@ -1,6 +1,5 @@
 package sample;
 
-import db.ConnectionDB;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleFloatProperty;
@@ -9,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -16,15 +16,14 @@ import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.linguistic_quantifiers.LinguisticQuantifier;
 import model.linguistic_variables.LinguisticVariable;
-import model.quality_measurements.*;
 import model.sentences.YSentence;
+import sentenceGeneration.MeasuringQualityOfSentences;
+import sentenceGeneration.YSentenceGenerator;
 import sentence_building_blocks.linguistic_variables.AllLinguisticVariables;
 import sentence_building_blocks.qualifiers.AllLinguisticQuantifiers;
 
 import java.net.URL;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -38,22 +37,23 @@ public class Controller implements Initializable {
 
     private List<String> selectedLinguisticQuantifiers = new LinkedList<>();
     private List<String> selectedLinguisticVariables = new LinkedList<>();
+    private List<CheckBox> selectedQualityMeasurements;
 
     @FXML
-    public ListView<String> qListView;
-    @FXML
-    public ListView<String> wListView;
-    @FXML
-    public ListView<String> sListView;
+    public ListView<String> qListView, wListView, sListView;
 
     @FXML
-    public TableView<ViewSentence> sentences;
+    public TableView<ViewSentence> viewSentences;
     public TableColumn<ViewSentence, String> sentence;
     public TableColumn<ViewSentence, Float> accuracy;
 
+    @FXML
+    public CheckBox t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        selectedQualityMeasurements = Arrays.asList(t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11);
+        selectedQualityMeasurements.forEach(qm -> qm.setSelected(true));
 
         sentence.setCellValueFactory(new PropertyValueFactory<>("sentence"));
         accuracy.setCellValueFactory(new PropertyValueFactory<>("accuracy"));
@@ -81,45 +81,19 @@ public class Controller implements Initializable {
     public void getSentence() {
         data.clear();
 
-        List<QualityMeasurement> qualityMeasurementsTypeOne = new LinkedList<>();
-        qualityMeasurementsTypeOne.add(new T1_DegreeOfTruth());
-        qualityMeasurementsTypeOne.add(new T2_DegreeOfImprecision());
-        qualityMeasurementsTypeOne.add(new T4_DegreeOfAppropriatness());
-        qualityMeasurementsTypeOne.add(new T5_DegreeOfSummarizersCount());
-        qualityMeasurementsTypeOne.add(new T6_DegreeOfQuantifierImprecision());
-        qualityMeasurementsTypeOne.add(new T7_DegreeOfQuantifierCardinality());
-        qualityMeasurementsTypeOne.add(new T8_DegreeOfSummarizerCardinality());
+        List<LinguisticQuantifier> qList = allLinguisticQuantifiers.getLinguisticQuantifiers().stream().filter(q -> selectedLinguisticQuantifiers.contains(q.getName())).collect(Collectors.toList());
+        List<LinguisticVariable> sList = allLinguisticVariables.getLinguisticVariables().stream().filter(s -> selectedLinguisticVariables.contains(s.getName())).collect(Collectors.toList());
 
-        for(LinguisticQuantifier q : allLinguisticQuantifiers.getLinguisticQuantifiers().stream().filter(q -> selectedLinguisticQuantifiers.contains(q.getName())).collect(Collectors.toList())) {
-            for(LinguisticVariable s : allLinguisticVariables.getLinguisticVariables().stream().filter(s -> selectedLinguisticVariables.contains(s.getName())).collect(Collectors.toList())) {
-                for(String label : s.getLabels()) {
-                    YSentence ySentence = new YSentence(q,s,label);
+        List<YSentence> sentences = YSentenceGenerator.generateSentences(qList,sList);
 
-                    List<Float> x = new LinkedList<>();
+        List<Boolean> selectedMeasurements = selectedQualityMeasurements.stream().map(CheckBox::isSelected).collect(Collectors.toList());
+        MeasuringQualityOfSentences measuringQualityOfSentences = new MeasuringQualityOfSentences(selectedMeasurements);
 
-                    try {
-                        Statement st = ConnectionDB.getConnection().createStatement();
-                        ResultSet rs = st.executeQuery("select " + s.getColumn() + " from flights");
-                        while (rs.next()) {
-                            x.add(rs.getFloat(s.getColumn()));
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-
-                    ySentence.process(x);
-
-                    float quality = 0;
-                    for(QualityMeasurement qm : qualityMeasurementsTypeOne) {
-                        quality+= qm.calculateValue(ySentence);
-                    }
-                    quality/=qualityMeasurementsTypeOne.size();
-
-                    data.add(new ViewSentence(ySentence.toString(), quality));
-                }
-            }
+        for(YSentence ySentence : sentences) {
+            data.add(new ViewSentence(ySentence.toString(), measuringQualityOfSentences.calculateQuality(ySentence)));
         }
-        sentences.setItems(data);
+
+        viewSentences.setItems(data);
     }
 
     private void setObserver(ListView<String> listView, List<String> selectedItems) {
