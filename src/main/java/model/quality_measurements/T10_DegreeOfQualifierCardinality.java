@@ -1,26 +1,20 @@
 package model.quality_measurements;
 
-import model.sentences.GSentence;
-import model.sentences.KSentence;
-import model.sentences.Sentence;
-import model.sentences.YSentence;
+import model.FuzzySet;
+import model.sentences.*;
 
 public class T10_DegreeOfQualifierCardinality implements QualityMeasurement{
 
     @Override
     public float calculateValue(Sentence sentence) {
         float value = 0;
-        switch (sentence.getType()) {
-            case Y:
-                YSentence ySentence = (YSentence)sentence;
-                value = 0;
-                break;
-            case K:
-                KSentence kSentence = (KSentence)sentence;
-                break;
-            case G:
-                GSentence gSentence = (GSentence)sentence;
-                break;
+        if (sentence.getType() == SentenceType.K) {
+            KSentence kSentence = (KSentence) sentence;
+            value = 1;
+            for (FuzzySet fs : kSentence.getWFuzzySets()) {
+                value *= (fs.getCardinality() / fs.getSize());
+            }
+            value = 1 - (float) Math.pow(value, 1 / kSentence.getWFuzzySets().size());
         }
         return value;
     }
