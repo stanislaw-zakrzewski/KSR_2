@@ -1,5 +1,6 @@
 package model.quality_measurements;
 
+import model.FuzzySet;
 import model.sentences.GSentence;
 import model.sentences.KSentence;
 import model.sentences.Sentence;
@@ -12,14 +13,23 @@ public class T4_DegreeOfAppropriatness implements QualityMeasurement {
         float value = 0;
         switch (sentence.getType()) {
             case Y:
-                YSentence ySentence = (YSentence)sentence;
-                value = (ySentence.getSSupp()/ySentence.getSSize());
-                break;
-            case K:
-                KSentence kSentence = (KSentence)sentence;
+                YSentence ySentence = (YSentence) sentence;
+                value = (ySentence.getSSupp() / ySentence.getSSize());
                 break;
             case G:
-                GSentence gSentence = (GSentence)sentence;
+                GSentence gSentence = (GSentence) sentence;
+                value = 1;
+                for (FuzzySet fs : gSentence.getSFuzzySets()) {
+                    value *= (fs.getSupp() / fs.getSize());
+                }
+                break;
+            case K:
+                KSentence kSentence = (KSentence) sentence;
+                value = 1;
+                for (FuzzySet fs : kSentence.getSFuzzySets()) {
+                    value *= (fs.getSupp() / fs.getSize());
+                }
+                value = Math.abs(value - kSentence.getWSCombinedSupp() / kSentence.getWCombinedSupp());
                 break;
         }
         return value;

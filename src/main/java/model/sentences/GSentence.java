@@ -24,4 +24,12 @@ public class GSentence {
     public List<FuzzySet> getSFuzzySets() {
         return sFuzzySets;
     }
+
+    public float getQSupp() {
+        return 0;
+    }
+
+    public int getQSize() {
+        return 0;
+    }
 }

@@ -12,16 +12,16 @@ public class T1_DegreeOfTruth implements QualityMeasurement {
         float value = 0;
         switch (sentence.getType()) {
             case Y:
-                YSentence ySentence = (YSentence)sentence;
-                value = ySentence.getQ().calculateMembership(ySentence.getSCardinality()/ySentence.getSSize());
+                YSentence ySentence = (YSentence) sentence;
+                value = ySentence.getQ().calculateMembership(ySentence.getSCardinality() / ySentence.getSSize());
                 break;
             case G:
-                GSentence gSentence = (GSentence)sentence;
-                value = gSentence.getQ().calculateMembership(gSentence.getCombinedSCardinality()/gSentence.getSSize());
+                GSentence gSentence = (GSentence) sentence;
+                value = gSentence.getQ().calculateMembership(gSentence.getCombinedSCardinality() / gSentence.getSSize());
                 break;
             case K:
-                KSentence kSentence = (KSentence)sentence;
-                value = kSentence.getQ().calculateMembership(kSentence.getCombinedSWCardinality()/kSentence.getCombinedWCardinality());
+                KSentence kSentence = (KSentence) sentence;
+                value = kSentence.getQ().calculateMembership(kSentence.getCombinedSWCardinality() / kSentence.getCombinedWCardinality());
                 break;
         }
         return value;

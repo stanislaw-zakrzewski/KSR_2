@@ -32,4 +32,12 @@ public class KSentence {
     public float getWCombinedSupp() {
         return 0;
     }
+
+    public float getQSize() {
+        return 0;
+    }
+
+    public int getQSupp() {
+        return 0;
+    }
 }
