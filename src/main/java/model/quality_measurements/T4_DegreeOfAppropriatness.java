@@ -14,7 +14,7 @@ public class T4_DegreeOfAppropriatness implements QualityMeasurement {
         switch (sentence.getType()) {
             case Y:
                 YSentence ySentence = (YSentence) sentence;
-                value = (ySentence.getSSupp() / ySentence.getSSize());
+                value = (ySentence.getSFuzzySet().getSupp() / ySentence.getSFuzzySet().getSize());
                 break;
             case G:
                 GSentence gSentence = (GSentence) sentence;

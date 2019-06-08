@@ -14,7 +14,7 @@ public class T2_DegreeOfImprecision implements QualityMeasurement {
         switch (sentence.getType()) {
             case Y:
                 YSentence ySentence = (YSentence) sentence;
-                value = 1 - (ySentence.getSSupp() / ySentence.getSSize());
+                value = 1 - (ySentence.getSFuzzySet().getSupp() / ySentence.getSFuzzySet().getSize());
                 break;
             case G:
                 GSentence gSentence = (GSentence) sentence;

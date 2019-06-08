@@ -13,6 +13,7 @@ public class YSentence implements Sentence {
     @Getter
     private LinguisticVariable s;
     private String sLabel;
+    @Getter
     private FuzzySet sFuzzySet;
 
     public YSentence(LinguisticQuantifier q, LinguisticVariable s, String sLabel) {
@@ -28,20 +29,6 @@ public class YSentence implements Sentence {
                 sFuzzySet.addValue(f);
             }
         }
-    }
-
-    public float getSCardinality() {
-        return sFuzzySet.getCardinality();
-    }
-
-    public float getQSupp() {return q.getSupp();}
-
-    public float getQSize() {return q.getSize();}
-
-    public float getSSupp() { return sFuzzySet.getSupp();}
-
-    public float getSSize() {
-        return sFuzzySet.getSize();
     }
 
     @Override

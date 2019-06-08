@@ -1,35 +1,37 @@
 package model.sentences;
 
-import model.FuzzySet;
+import lombok.Getter;
 import model.linguistic_quantifiers.LinguisticQuantifier;
+import model.linguistic_variables.CombinationLinguisticVariable;
 
 import java.util.List;
 
-public class GSentence {
-    private LinguisticQuantifier linguisticQuantifier;
-    private List<FuzzySet> sFuzzySets;
+public class GSentence implements Sentence{
+    @Getter
+    private LinguisticQuantifier q;
+    @Getter
+    private CombinationLinguisticVariable s;
 
-    public LinguisticQuantifier getQ() {
-        return linguisticQuantifier;
+    public void process(List<Float> x) {
+        s.setValues(x);
+        s.getFuzzySet();
     }
 
     public float getCombinedSCardinality() {
-        return 0;
+        return s.getFuzzySet().getCardinality();
     }
 
     public float getSSize() {
-        return 0;
+        return s.getFuzzySet().getSize();
     }
 
-    public List<FuzzySet> getSFuzzySets() {
-        return sFuzzySets;
+    @Override
+    public SentenceType getType() {
+        return SentenceType.G;
     }
 
-    public float getQSupp() {
-        return 0;
-    }
-
-    public int getQSize() {
-        return 0;
+    @Override
+    public String toString() {
+        return q.getName() + " lotów jest " + s.toString();
     }
 }

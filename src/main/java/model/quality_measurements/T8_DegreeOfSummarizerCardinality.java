@@ -14,7 +14,7 @@ public class T8_DegreeOfSummarizerCardinality implements QualityMeasurement {
         switch (sentence.getType()) {
             case Y:
                 YSentence ySentence = (YSentence) sentence;
-                value -= (ySentence.getSCardinality() / ySentence.getSSize());
+                value -= (ySentence.getSFuzzySet().getCardinality() / ySentence.getSFuzzySet().getSize());
                 break;
             case G:
                 GSentence gSentence = (GSentence) sentence;
