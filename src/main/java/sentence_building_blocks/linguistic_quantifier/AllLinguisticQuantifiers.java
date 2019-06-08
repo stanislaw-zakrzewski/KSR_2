@@ -1,4 +1,4 @@
-package sentence_building_blocks.qualifiers;
+package sentence_building_blocks.linguistic_quantifier;
 
 import lombok.Getter;
 import model.linguistic_quantifiers.LinguisticQuantifier;

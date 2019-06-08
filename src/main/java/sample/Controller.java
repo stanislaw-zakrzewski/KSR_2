@@ -22,7 +22,7 @@ import sentence_generation.GSentenceGenerator;
 import sentence_generation.MeasuringQualityOfSentences;
 import sentence_generation.YSentenceGenerator;
 import sentence_building_blocks.linguistic_variables.AllLinguisticVariables;
-import sentence_building_blocks.qualifiers.AllLinguisticQuantifiers;
+import sentence_building_blocks.linguistic_quantifier.AllLinguisticQuantifiers;
 
 import java.net.URL;
 import java.util.Arrays;
