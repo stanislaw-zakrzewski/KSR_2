@@ -12,5 +12,6 @@ public class AllLinguisticVariables {
     public AllLinguisticVariables() {
         linguisticVariables = new LinkedList<>();
         linguisticVariables.add(new LinguisticVariableExample());
+        linguisticVariables.add(new LinguisticVariableExample2());
     }
 }

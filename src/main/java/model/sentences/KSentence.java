@@ -15,6 +15,18 @@ public class KSentence implements Sentence {
     @Getter
     private CombinationLinguisticVariable w;
 
+    public KSentence(LinguisticQuantifier q, CombinationLinguisticVariable s, CombinationLinguisticVariable w) {
+        this.q = q;
+        this.s = s;
+        this.w = w;
+    }
+
+    public void process(List<Float> x) {
+        s.setValues(x);
+        s.getFuzzySet();
+        w.setValues(x);
+        w.getFuzzySet();
+    }
 
     public float getCombinedSWCardinality() {
         float value = 0;

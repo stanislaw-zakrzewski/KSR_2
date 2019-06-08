@@ -1,4 +1,4 @@
-package sentenceGeneration;
+package sentence_generation;
 
 import model.quality_measurements.*;
 import model.sentences.Sentence;

@@ -16,9 +16,11 @@ import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.linguistic_quantifiers.LinguisticQuantifier;
 import model.linguistic_variables.LinguisticVariable;
+import model.sentences.GSentence;
 import model.sentences.YSentence;
-import sentenceGeneration.MeasuringQualityOfSentences;
-import sentenceGeneration.YSentenceGenerator;
+import sentence_generation.GSentenceGenerator;
+import sentence_generation.MeasuringQualityOfSentences;
+import sentence_generation.YSentenceGenerator;
 import sentence_building_blocks.linguistic_variables.AllLinguisticVariables;
 import sentence_building_blocks.qualifiers.AllLinguisticQuantifiers;
 
@@ -53,7 +55,7 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         selectedQualityMeasurements = Arrays.asList(t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11);
-        selectedQualityMeasurements.forEach(qm -> qm.setSelected(true));
+        //selectedQualityMeasurements.forEach(qm -> qm.setSelected(true));
 
         sentence.setCellValueFactory(new PropertyValueFactory<>("sentence"));
         accuracy.setCellValueFactory(new PropertyValueFactory<>("accuracy"));
@@ -84,13 +86,14 @@ public class Controller implements Initializable {
         List<LinguisticQuantifier> qList = allLinguisticQuantifiers.getLinguisticQuantifiers().stream().filter(q -> selectedLinguisticQuantifiers.contains(q.getName())).collect(Collectors.toList());
         List<LinguisticVariable> sList = allLinguisticVariables.getLinguisticVariables().stream().filter(s -> selectedLinguisticVariables.contains(s.getName())).collect(Collectors.toList());
 
-        List<YSentence> sentences = YSentenceGenerator.generateSentences(qList,sList);
+        List<YSentence> ySentences = YSentenceGenerator.generateSentences(qList,sList);
+        List<GSentence> gSentences = GSentenceGenerator.generateSentences(qList, sList);
 
         List<Boolean> selectedMeasurements = selectedQualityMeasurements.stream().map(CheckBox::isSelected).collect(Collectors.toList());
         MeasuringQualityOfSentences measuringQualityOfSentences = new MeasuringQualityOfSentences(selectedMeasurements);
 
-        for(YSentence ySentence : sentences) {
-            data.add(new ViewSentence(ySentence.toString(), measuringQualityOfSentences.calculateQuality(ySentence)));
+        for(GSentence gSentence : gSentences) {
+            data.add(new ViewSentence(gSentence.toString(), measuringQualityOfSentences.calculateQuality(gSentence)));
         }
 
         viewSentences.setItems(data);

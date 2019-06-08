@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.Collections;
 import java.util.List;
 
 public class InsertionDB {
@@ -22,7 +23,8 @@ public class InsertionDB {
     }
 
     public Boolean insertDB(Connection connection, List<List<String>> records) {
-        for (int i = 1; i < records.size(); i++) {
+        Collections.shuffle(records);
+        for (int i = 1; i < 11000; i++) {
             if (connection != null) {
                 PreparedStatement ps = null;
                 String sql = "INSERT INTO flights VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";

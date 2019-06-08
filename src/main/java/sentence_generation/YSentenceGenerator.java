@@ -1,4 +1,4 @@
-package sentenceGeneration;
+package sentence_generation;
 
 import db.ConnectionDB;
 import model.linguistic_quantifiers.LinguisticQuantifier;
@@ -17,21 +17,18 @@ public class YSentenceGenerator {
         LinkedList<YSentence> sentences = new LinkedList<>();
         for (LinguisticQuantifier q : qList) {
             for (LinguisticVariable s : sList) {
+                LinkedList<Float> x = new LinkedList<>();
+                try {
+                    Statement st = ConnectionDB.getConnection().createStatement();
+                    ResultSet rs = st.executeQuery("select " + s.getColumn() + " from flights");
+                    while (rs.next()) {
+                        x.add(rs.getFloat(s.getColumn()));
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
                 for (String label : s.getLabels()) {
                     sentences.add(new YSentence(q, s, label));
-
-                    LinkedList<Float> x = new LinkedList<>();
-
-                    try {
-                        Statement st = ConnectionDB.getConnection().createStatement();
-                        ResultSet rs = st.executeQuery("select " + s.getColumn() + " from flights");
-                        while (rs.next()) {
-                            x.add(rs.getFloat(s.getColumn()));
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-
                     sentences.getLast().process(x);
                 }
             }

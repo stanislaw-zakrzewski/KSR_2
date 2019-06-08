@@ -32,7 +32,7 @@ public class GSentence implements Sentence{
     }
 
     public float getSSize() {
-        return s.getFuzzySet().getSize();
+        return s.getSSize();
     }
 
     @Override
