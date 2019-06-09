@@ -25,10 +25,7 @@ import sentence_building_blocks.linguistic_quantifier.AllLinguisticQuantifiers;
 
 import java.io.*;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Controller implements Initializable {
@@ -43,7 +40,7 @@ public class Controller implements Initializable {
     private List<TextArea> weights;
 
     @FXML
-    public ListView<String> qListView, sListView;
+    public ListView<String> qListView, sListView, listaFunkcji;
 
     @FXML
     public TextArea fileName, w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11;
@@ -72,6 +69,16 @@ public class Controller implements Initializable {
         }
         setObserver(qListView, selectedLinguisticQuantifiers);
         setObserver(sListView, selectedLinguisticVariables);
+
+        ArrayList<String> funkcje = new ArrayList<>();
+        funkcje.add("Trójkątna funkcja przynależności");
+        funkcje.add("Trapezowa funkcja przynależności");
+        funkcje.add("Gaussowska funkcja przynależności");
+        funkcje.add("Dzwonowa funkcja przynależności");
+        funkcje.add("Funkcja przynależności klasy Gamma");
+        funkcje.add("Funkcja przynależności klasy S");
+
+        listaFunkcji.setItems(FXCollections.observableArrayList(funkcje));
     }
 
     public void getSentence() {
@@ -159,5 +166,9 @@ public class Controller implements Initializable {
         public void setAccuracy(float newAccuracy) {
             accuracy.set(newAccuracy);
         }
+    }
+
+    public void wybierzFunkcje() {
+
     }
 }
