@@ -24,12 +24,12 @@ public class LinguisticQuantifierExample implements LinguisticQuantifier {
 
     @Override
     public float getCardinality() {
-        return 0.3f;//TODO ogarnąć to
+        return membershipFunction.getIntegralValue(0,1);
     }
 
     @Override
     public float getSupp() {
-        return 0.6f;//TODO ogarnąć to
+        return membershipFunction.getSupport(0, 1);
     }
 
     @Override
