@@ -23,4 +23,9 @@ public class BellidalMembershipFunction implements MembershipFunction {
         float x = (width+middle)/4;
         return (middle+x) - (middle-x);
     }
+
+    @Override
+    public float getIntegralValue(float beggingValue, float endValue) {
+        return 0; //TODO Immpossible?
+    }
 }

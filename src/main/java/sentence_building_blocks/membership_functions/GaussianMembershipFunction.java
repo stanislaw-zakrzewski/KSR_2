@@ -1,6 +1,7 @@
 package sentence_building_blocks.membership_functions;
 
 import model.membership_functions.MembershipFunction;
+import org.apache.commons.math3.special.Erf;
 
 public class GaussianMembershipFunction implements MembershipFunction {
     private float width;
@@ -18,7 +19,15 @@ public class GaussianMembershipFunction implements MembershipFunction {
 
     @Override
     public float getSupport(float beggingValue, float endValue) {
-        float x = (width+middle)/4;
-        return (middle+x) - (middle-x);
+        float x = (width + middle) / 4;
+        return (middle + x) - (middle - x);
+    }
+
+    @Override
+    public float getIntegralValue(float beggingValue, float endValue) {
+        //całka dla konca-całka dla początka
+        double end = -0.5 * Math.sqrt(Math.PI) * middle * Erf.erf((middle - endValue) / width);
+        double beg = -0.5 * Math.sqrt(Math.PI) * middle * Erf.erf((middle - beggingValue) / width);
+        return (float) (end - beg);
     }
 }

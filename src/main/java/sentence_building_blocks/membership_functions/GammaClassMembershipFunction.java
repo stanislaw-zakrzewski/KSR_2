@@ -14,7 +14,7 @@ public class GammaClassMembershipFunction implements MembershipFunction {
     @Override
     public float calculateMembership(float value) {
         if (value <= begging) return 0;
-        else if (begging < value && value <= end) return ((value-begging)/(end-begging));
+        else if (begging < value && value <= end) return ((value - begging) / (end - begging));
         else return 1;
     }
 
@@ -24,5 +24,17 @@ public class GammaClassMembershipFunction implements MembershipFunction {
         if (beggingValue > begging) b = beggingValue;
         else b = begging;
         return endValue - b;
+    }
+
+    @Override
+    public float getIntegralValue(float beggingValue, float endValue) {
+        float b;
+        if (beggingValue > begging) b = beggingValue;
+        else b = begging;
+
+        float tp = ((endValue - b) * (calculateMembership(endValue) - calculateMembership(beggingValue))) / 2;
+        float pp = (endValue-end);
+
+        return tp+pp;
     }
 }

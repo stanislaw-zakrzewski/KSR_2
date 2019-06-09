@@ -30,4 +30,14 @@ public class TriangleMembershipFunction implements MembershipFunction {
         else e = end;
         return e - b;
     }
+
+    @Override
+    public float getIntegralValue(float beggingValue, float endValue) {
+        float b, e;
+        if (beggingValue > begging) b = beggingValue;
+        else b = begging;
+        if (endValue < end) e = endValue;
+        else e = end;
+        return ((e - b)*(calculateMembership(middle) - 0))/2;
+    }
 }

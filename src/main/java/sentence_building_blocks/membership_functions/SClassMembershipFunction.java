@@ -28,4 +28,9 @@ public class SClassMembershipFunction implements MembershipFunction {
         else b = begging;
         return endValue - b;
     }
+
+    @Override
+    public float getIntegralValue(float beggingValue, float endValue) {
+        return 0;//TODO no nie ma
+    }
 }
