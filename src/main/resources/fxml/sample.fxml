@@ -261,82 +261,82 @@
                                <RowConstraints minHeight="200.0" prefHeight="30.0" vgrow="SOMETIMES" />
                              </rowConstraints>
                               <children>
-                                 <CheckBox mnemonicParsing="false" text="Trójkątna funkcja przynależności" GridPane.rowIndex="1" GridPane.rowSpan="2">
+                                 <CheckBox fx:id="f1" mnemonicParsing="false" text="Trójkątna funkcja przynależności" GridPane.rowIndex="1" GridPane.rowSpan="2">
                                     <GridPane.margin>
                                        <Insets />
                                     </GridPane.margin>
                                  </CheckBox>
-                                 <CheckBox layoutX="10.0" layoutY="327.0" mnemonicParsing="false" text="Trapezowa funkcja przynależności" GridPane.rowIndex="3" GridPane.rowSpan="2" />
-                                 <CheckBox layoutX="10.0" layoutY="327.0" mnemonicParsing="false" text="Gaussowska funkcja przynależności" GridPane.rowIndex="5" GridPane.rowSpan="2" />
-                                 <CheckBox layoutX="10.0" layoutY="327.0" mnemonicParsing="false" text="Dzwonowa funkcja przynależności" GridPane.rowIndex="7" GridPane.rowSpan="2" />
-                                 <CheckBox layoutX="10.0" layoutY="327.0" mnemonicParsing="false" text="Funkcja przynależności klasy Gamma" GridPane.rowIndex="9" GridPane.rowSpan="2" />
-                                 <CheckBox layoutX="10.0" layoutY="327.0" mnemonicParsing="false" text="Funkcja przynależności klasy S" GridPane.rowIndex="11" GridPane.rowSpan="2" />
+                                 <CheckBox fx:id="f2" layoutX="10.0" layoutY="327.0" mnemonicParsing="false" text="Trapezowa funkcja przynależności" GridPane.rowIndex="3" GridPane.rowSpan="2" />
+                                 <CheckBox fx:id="f3" layoutX="10.0" layoutY="327.0" mnemonicParsing="false" text="Gaussowska funkcja przynależności" GridPane.rowIndex="5" GridPane.rowSpan="2" />
+                                 <CheckBox fx:id="f4" layoutX="10.0" layoutY="327.0" mnemonicParsing="false" text="Dzwonowa funkcja przynależności" GridPane.rowIndex="7" GridPane.rowSpan="2" />
+                                 <CheckBox fx:id="f5" layoutX="10.0" layoutY="327.0" mnemonicParsing="false" text="Funkcja przynależności klasy Gamma" GridPane.rowIndex="9" GridPane.rowSpan="2" />
+                                 <CheckBox fx:id="f6" layoutX="10.0" layoutY="327.0" mnemonicParsing="false" text="Funkcja przynależności klasy S" GridPane.rowIndex="11" GridPane.rowSpan="2" />
                                  <Label text="Wybierz nową funkcję przynależności i wprowadź odpowiednie parametry" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                     <font>
                                        <Font name="System Bold" size="14.0" />
                                     </font>
                                  </Label>
-                                 <Button mnemonicParsing="false" onAction="#changeFunction" text="Podmień funkcję" GridPane.halignment="CENTER" GridPane.rowIndex="13">
+                                 <Button fx:id="changeFunction" mnemonicParsing="false" onAction="#changeFunction" text="Podmień funkcję" GridPane.halignment="CENTER" GridPane.rowIndex="13">
                                     <font>
                                        <Font name="System Bold" size="14.0" />
                                     </font>
                                  </Button>
-                                 <TextField GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <TextField fx:id="a_1" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                     <GridPane.margin>
                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                     </GridPane.margin>
                                  </TextField>
-                                 <TextField GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                 <TextField fx:id="a_2" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                     <GridPane.margin>
                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                     </GridPane.margin>
                                  </TextField>
-                                 <TextField GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                 <TextField fx:id="a_3" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                     <GridPane.margin>
                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                     </GridPane.margin>
                                  </TextField>
-                                 <TextField GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                 <TextField fx:id="a_4" GridPane.columnIndex="1" GridPane.rowIndex="8">
                                     <GridPane.margin>
                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                     </GridPane.margin>
                                  </TextField>
-                                 <TextField GridPane.columnIndex="1" GridPane.rowIndex="10">
+                                 <TextField fx:id="a_5" GridPane.columnIndex="1" GridPane.rowIndex="10">
                                     <GridPane.margin>
                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                     </GridPane.margin>
                                  </TextField>
-                                 <TextField GridPane.columnIndex="1" GridPane.rowIndex="12">
+                                 <TextField fx:id="a_6" GridPane.columnIndex="1" GridPane.rowIndex="12">
                                     <GridPane.margin>
                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                     </GridPane.margin>
                                  </TextField>
-                                 <TextField GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                 <TextField fx:id="b_1" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                     <GridPane.margin>
                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                     </GridPane.margin>
                                  </TextField>
-                                 <TextField GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                 <TextField fx:id="b_2" GridPane.columnIndex="2" GridPane.rowIndex="4">
                                     <GridPane.margin>
                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                     </GridPane.margin>
                                  </TextField>
-                                 <TextField GridPane.columnIndex="2" GridPane.rowIndex="6">
+                                 <TextField fx:id="b_3" GridPane.columnIndex="2" GridPane.rowIndex="6">
                                     <GridPane.margin>
                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                     </GridPane.margin>
                                  </TextField>
-                                 <TextField GridPane.columnIndex="2" GridPane.rowIndex="8">
+                                 <TextField fx:id="b_4" GridPane.columnIndex="2" GridPane.rowIndex="8">
                                     <GridPane.margin>
                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                     </GridPane.margin>
                                  </TextField>
-                                 <TextField GridPane.columnIndex="2" GridPane.rowIndex="10">
+                                 <TextField fx:id="b_5" GridPane.columnIndex="2" GridPane.rowIndex="10">
                                     <GridPane.margin>
                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                     </GridPane.margin>
                                  </TextField>
-                                 <TextField GridPane.columnIndex="2" GridPane.rowIndex="12">
+                                 <TextField fx:id="b_6" GridPane.columnIndex="2" GridPane.rowIndex="12">
                                     <GridPane.margin>
                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                     </GridPane.margin>
@@ -416,22 +416,22 @@
                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                     </GridPane.margin>
                                  </Label>
-                                 <TextField GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                 <TextField fx:id="c_1" GridPane.columnIndex="3" GridPane.rowIndex="2">
                                     <GridPane.margin>
                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                     </GridPane.margin>
                                  </TextField>
-                                 <TextField GridPane.columnIndex="3" GridPane.rowIndex="4">
+                                 <TextField fx:id="c_2" GridPane.columnIndex="3" GridPane.rowIndex="4">
                                     <GridPane.margin>
                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                     </GridPane.margin>
                                  </TextField>
-                                 <TextField GridPane.columnIndex="3" GridPane.rowIndex="8">
+                                 <TextField fx:id="c_4" GridPane.columnIndex="3" GridPane.rowIndex="8">
                                     <GridPane.margin>
                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                     </GridPane.margin>
                                  </TextField>
-                                 <TextField GridPane.columnIndex="4" GridPane.rowIndex="4">
+                                 <TextField fx:id="d_2" GridPane.columnIndex="4" GridPane.rowIndex="4">
                                     <GridPane.margin>
                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                     </GridPane.margin>

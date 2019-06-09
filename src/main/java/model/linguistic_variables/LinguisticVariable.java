@@ -18,4 +18,8 @@ public class LinguisticVariable {
     public MembershipFunction getMembershipFunctionForLabel(String label) {
         return membershipFunctions.get(label);
     }
+
+    public void setMembershipFunction(String label, MembershipFunction membershipFunction) {
+        membershipFunctions.replace(label, membershipFunction);
+    }
 }
