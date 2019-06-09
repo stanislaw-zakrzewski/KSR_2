@@ -24,8 +24,10 @@ public class GSentenceGenerator {
             e.printStackTrace();
         }
         if(sList.size() > 1) {
-            for(LinguisticVariable lv1 : sList) {
-                for (LinguisticVariable lv2 : sList) {
+            for(int i = 0; i < sList.size(); i++) {
+                LinguisticVariable lv1 = sList.get(i);
+                for (int j = i+1; j < sList.size(); j++) {
+                    LinguisticVariable lv2 = sList.get(j);
                     if(lv1.equals(lv2)) continue;
                     LinkedList<Float> x1 = new LinkedList<>();
                     LinkedList<Float> x2 = new LinkedList<>();

@@ -8,10 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.linguistic_quantifiers.LinguisticQuantifier;
@@ -24,6 +21,7 @@ import sentence_generation.YSentenceGenerator;
 import sentence_building_blocks.linguistic_variables.AllLinguisticVariables;
 import sentence_building_blocks.linguistic_quantifier.AllLinguisticQuantifiers;
 
+import java.io.*;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -40,22 +38,26 @@ public class Controller implements Initializable {
     private List<String> selectedLinguisticQuantifiers = new LinkedList<>();
     private List<String> selectedLinguisticVariables = new LinkedList<>();
     private List<CheckBox> selectedQualityMeasurements;
+    private List<TextArea> weights;
 
     @FXML
-    public ListView<String> qListView, wListView, sListView;
+    public ListView<String> qListView, sListView;
+
+    @FXML
+    public TextArea fileName, w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11;
 
     @FXML
     public TableView<ViewSentence> viewSentences;
     public TableColumn<ViewSentence, String> sentence;
-    public TableColumn<ViewSentence, Float> accuracy;
+    public TableColumn<ViewSentence, String> accuracy;
 
     @FXML
-    public CheckBox t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11;
+    public CheckBox t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, typeY, typeG, typeK;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         selectedQualityMeasurements = Arrays.asList(t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11);
-        //selectedQualityMeasurements.forEach(qm -> qm.setSelected(true));
+        weights = Arrays.asList(w1,w2,w3,w4,w5,w6,w7,w8,w9,w10,w11);
 
         sentence.setCellValueFactory(new PropertyValueFactory<>("sentence"));
         accuracy.setCellValueFactory(new PropertyValueFactory<>("accuracy"));
@@ -63,20 +65,10 @@ public class Controller implements Initializable {
         for(LinguisticQuantifier lq : allLinguisticQuantifiers.getLinguisticQuantifiers()) {
             qListView.getItems().add(lq.getName());
         }
-
         for(LinguisticVariable lv : allLinguisticVariables.getLinguisticVariables()) {
             sListView.getItems().add(lv.getName());
         }
         setObserver(qListView, selectedLinguisticQuantifiers);
-
-        wListView.setCellFactory(CheckBoxListCell.forListView(item -> {
-            BooleanProperty observable = new SimpleBooleanProperty();
-            observable.addListener((obs, wasSelected, isNowSelected) ->
-                    System.out.println("LinguisticQuantifier check box for "+item+" changed from "+wasSelected+" to "+isNowSelected)
-            );
-            return observable ;
-        }));
-
         setObserver(sListView, selectedLinguisticVariables);
     }
 
@@ -85,21 +77,42 @@ public class Controller implements Initializable {
 
         List<LinguisticQuantifier> qList = allLinguisticQuantifiers.getLinguisticQuantifiers().stream().filter(q -> selectedLinguisticQuantifiers.contains(q.getName())).collect(Collectors.toList());
         List<LinguisticVariable> sList = allLinguisticVariables.getLinguisticVariables().stream().filter(s -> selectedLinguisticVariables.contains(s.getName())).collect(Collectors.toList());
-
-        List<YSentence> ySentences = YSentenceGenerator.generateSentences(qList,sList);
-        List<GSentence> gSentences = GSentenceGenerator.generateSentences(qList, sList);
-
         List<Boolean> selectedMeasurements = selectedQualityMeasurements.stream().map(CheckBox::isSelected).collect(Collectors.toList());
-        MeasuringQualityOfSentences measuringQualityOfSentences = new MeasuringQualityOfSentences(selectedMeasurements);
+        List<Float> weightsValues = weights.stream().map(t -> Float.parseFloat(t.getText())).collect(Collectors.toList());
 
-        for(YSentence ySentence : ySentences) {
-            data.add(new ViewSentence(ySentence.toString(), measuringQualityOfSentences.calculateQuality(ySentence)));
+        MeasuringQualityOfSentences measuringQualityOfSentences = new MeasuringQualityOfSentences(selectedMeasurements, weightsValues);
+
+        if(typeY.isSelected()) {
+            for(YSentence ySentence : YSentenceGenerator.generateSentences(qList,sList)) {
+                data.add(new ViewSentence(ySentence.toString(), measuringQualityOfSentences.calculateQuality(ySentence)));
+            }
         }
-        for(GSentence gSentence : gSentences) {
-            data.add(new ViewSentence(gSentence.toString(), measuringQualityOfSentences.calculateQuality(gSentence)));
+        if(typeG.isSelected()) {
+            for(GSentence gSentence : GSentenceGenerator.generateSentences(qList, sList)) {
+                data.add(new ViewSentence(gSentence.toString(), measuringQualityOfSentences.calculateQuality(gSentence)));
+            }
+        }
+        if(typeK.isSelected()) {
+
         }
 
         viewSentences.setItems(data);
+    }
+
+    public void exportTXT() {
+        if(data.size() > 0) {
+
+            try (FileWriter writer = new FileWriter(fileName.getText());
+                 BufferedWriter bw = new BufferedWriter(writer)) {
+
+                for(ViewSentence viewSentence : data) {
+                    bw.write("[" + String.format("%.3f",viewSentence.accuracy.getValue()) + "]\t " + viewSentence.sentence.getValue() + "\n");
+                }
+
+            } catch (IOException e) {
+                System.err.format("IOException: %s%n", e);
+            }
+        }
     }
 
     private void setObserver(ListView<String> listView, List<String> selectedItems) {
@@ -135,8 +148,8 @@ public class Controller implements Initializable {
             sentence.set(newSentence);
         }
 
-        public float getAccuracy() {
-            return accuracy.floatValue();
+        public String getAccuracy() {
+            return String.format("%.3f",accuracy.floatValue());
         }
 
         public void setAccuracy(float newAccuracy) {
