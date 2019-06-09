@@ -4,6 +4,8 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -40,7 +42,10 @@ public class Controller implements Initializable {
     private List<TextArea> weights;
 
     @FXML
-    public ListView<String> qListView, sListView, listaFunkcji;
+    public ListView<String> qListView, sListView;
+
+    @FXML
+    public ComboBox<String> nameZmienna, nameEtykieta;
 
     @FXML
     public TextArea fileName, w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11;
@@ -70,15 +75,8 @@ public class Controller implements Initializable {
         setObserver(qListView, selectedLinguisticQuantifiers);
         setObserver(sListView, selectedLinguisticVariables);
 
-        ArrayList<String> funkcje = new ArrayList<>();
-        funkcje.add("Trójkątna funkcja przynależności");
-        funkcje.add("Trapezowa funkcja przynależności");
-        funkcje.add("Gaussowska funkcja przynależności");
-        funkcje.add("Dzwonowa funkcja przynależności");
-        funkcje.add("Funkcja przynależności klasy Gamma");
-        funkcje.add("Funkcja przynależności klasy S");
-
-        listaFunkcji.setItems(FXCollections.observableArrayList(funkcje));
+        nameZmienna.setItems(FXCollections.observableArrayList(allLinguisticVariables.getLinguisticVariables().stream().map(LinguisticVariable::getName).collect(Collectors.toList())));
+        nameZmienna.valueProperty().addListener((ov, t, name) -> nameEtykieta.setItems(FXCollections.observableArrayList(allLinguisticVariables.getLinguisticVariables().stream().filter(v -> v.getName().equals(name)).findFirst().get().getLabels())));
     }
 
     public void getSentence() {

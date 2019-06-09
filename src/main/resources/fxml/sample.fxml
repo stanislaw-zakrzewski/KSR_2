@@ -265,7 +265,7 @@
                                        <Font name="System Bold" size="14.0" />
                                     </font>
                                  </Label>
-                                 <Button mnemonicParsing="false" text="Podmień funkcję" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+                                 <Button fx:id="changeFunction" mnemonicParsing="false" text="Podmień funkcję" GridPane.halignment="CENTER" GridPane.rowIndex="7">
                                     <font>
                                        <Font name="System Bold" size="14.0" />
                                     </font>
@@ -285,8 +285,8 @@
                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                              </rowConstraints>
                               <children>
-                                 <ComboBox prefWidth="150.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                                 <ComboBox prefWidth="150.0" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                                 <ComboBox fx:id="nameZmienna" prefWidth="400.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                                 <ComboBox fx:id="nameEtykieta" prefWidth="400.0" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
                                  <Label text="Wybierz zmienną lingwistyczną" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                                     <font>
                                        <Font name="System Bold" size="14.0" />
