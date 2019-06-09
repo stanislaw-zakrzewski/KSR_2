@@ -15,4 +15,10 @@ public class GaussianMembershipFunction implements MembershipFunction {
     public float calculateMembership(float value) {
         return (float) Math.exp(-(Math.pow(((value - middle) / width), 2)));
     }
+
+    @Override
+    public float getSupport(float beggingValue, float endValue) {
+        float x = (width+middle)/4;
+        return (middle+x) - (middle-x);
+    }
 }

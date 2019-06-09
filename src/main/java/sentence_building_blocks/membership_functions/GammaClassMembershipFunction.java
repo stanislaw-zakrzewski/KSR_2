@@ -17,4 +17,12 @@ public class GammaClassMembershipFunction implements MembershipFunction {
         else if (begging < value && value <= end) return ((value-begging)/(end-begging));
         else return 1;
     }
+
+    @Override
+    public float getSupport(float beggingValue, float endValue) {
+        float b;
+        if (beggingValue > begging) b = beggingValue;
+        else b = begging;
+        return endValue - b;
+    }
 }

@@ -13,11 +13,19 @@ public class SClassMembershipFunction implements MembershipFunction {
 
     @Override
     public float calculateMembership(float value) {
-        float b = ((begging +end)/2);
+        float b = ((begging + end) / 2);
 
         if (value <= begging) return 0;
         else if (begging < value && value <= b) return (float) (2 * Math.pow(((value - begging) / (end - begging)), 2));
         else if (b < value && value <= end) return (float) (1 - (2 * Math.pow(((value - end) / (end - begging)), 2)));
         else return 1;
+    }
+
+    @Override
+    public float getSupport(float beggingValue, float endValue) {
+        float b;
+        if (beggingValue > begging) b = beggingValue;
+        else b = begging;
+        return endValue - b;
     }
 }

@@ -17,4 +17,10 @@ public class BellidalMembershipFunction implements MembershipFunction {
     public float calculateMembership(float value) {
         return (float) (1 / (1 + Math.pow(Math.abs((value - middle) / width), (2 * tilt))));
     }
+
+    @Override
+    public float getSupport(float beggingValue, float endValue) {
+        float x = (width+middle)/4;
+        return (middle+x) - (middle-x);
+    }
 }

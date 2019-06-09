@@ -23,4 +23,14 @@ public class TrapezoidalMembershipFunction implements MembershipFunction {
         else if (endTop < value && value <= end) return ((end - value) / (end - endTop));
         else return 0;
     }
+
+    @Override
+    public float getSupport(float beggingValue, float endValue) {
+        float b, e;
+        if (beggingValue > begging) b = beggingValue;
+        else b = begging;
+        if (endValue < end) e = endValue;
+        else e = end;
+        return e - b;
+    }
 }

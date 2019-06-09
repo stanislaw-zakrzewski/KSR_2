@@ -19,4 +19,9 @@ public class MembershipFunctionExample implements MembershipFunction {
             return 0;
         }
     }
+
+    @Override
+    public float getSupport(float beggingValue, float endValue) {
+        return 0;
+    }
 }
