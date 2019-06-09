@@ -10,7 +10,7 @@ public class AircraftLinguisticVariable extends LinguisticVariable {
     public AircraftLinguisticVariable() {
         name = "spóźnienie przez późno dotarty samolot";
         column = "late_aircraft_delay";
-        labels = Arrays.asList("mało spóźniony", "trochę spóźniony", "bardzo spóźniony");
+        labels = Arrays.asList("mało spóźniony przez późno dotarty samolot", "trochę spóźniony przez późno dotarty samolot", "bardzo spóźniony przez późno dotarty samolot");
         membershipFunctions = new HashMap<>();
         membershipFunctions.put(labels.get(0), new SClassMembershipFunction(0, 50));
         membershipFunctions.put(labels.get(1), new SClassMembershipFunction(50, 150));

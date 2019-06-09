@@ -10,7 +10,7 @@ public class SecurityLinguisticVeriable extends LinguisticVariable {
     public SecurityLinguisticVeriable() {
         name = "spóźnienie przez bezpieczeństwo";
         column = "security_delay";
-        labels = Arrays.asList("mało spóźniony", "trochę spóźniony", "bardzo spóźniony");
+        labels = Arrays.asList("mało spóźniony z powodu bezpieczeństwa", "trochę spóźniony z powodu bezpieczeństwa", "bardzo spóźniony z powodu bezpieczeństwa");
         membershipFunctions = new HashMap<>();
         membershipFunctions.put(labels.get(0), new SClassMembershipFunction(0, 5));
         membershipFunctions.put(labels.get(1), new SClassMembershipFunction(5, 15));

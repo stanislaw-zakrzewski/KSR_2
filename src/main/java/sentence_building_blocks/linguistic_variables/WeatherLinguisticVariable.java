@@ -10,7 +10,7 @@ public class WeatherLinguisticVariable extends LinguisticVariable {
     public WeatherLinguisticVariable() {
             name = "spóźnienie przez pogodę";
             column = "weather_delay";
-            labels = Arrays.asList("mało spóźniony", "trochę spóźniony", "bardzo spóźniony");
+            labels = Arrays.asList("mało spóźniony przez pogodę", "trochę spóźniony przez pogodę", "bardzo spóźniony przez pogodę");
             membershipFunctions = new HashMap<>();
             membershipFunctions.put(labels.get(0), new SClassMembershipFunction(0, 250));
             membershipFunctions.put(labels.get(1), new SClassMembershipFunction(250, 600));

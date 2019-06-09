@@ -10,7 +10,7 @@ public class NASLinguisticVariable extends LinguisticVariable {
     public NASLinguisticVariable() {
         name = "spóźnienie przez National Aviation System";
         column = "nas_delay";
-        labels = Arrays.asList("mało spóźniony", "trochę spóźniony", "bardzo spóźniony");
+        labels = Arrays.asList("mało spóźniony przez NAS", "trochę spóźniony przez NAS", "bardzo spóźniony przez NAS");
         membershipFunctions = new HashMap<>();
         membershipFunctions.put(labels.get(0), new SClassMembershipFunction(0, 100));
         membershipFunctions.put(labels.get(1), new SClassMembershipFunction(100, 300));

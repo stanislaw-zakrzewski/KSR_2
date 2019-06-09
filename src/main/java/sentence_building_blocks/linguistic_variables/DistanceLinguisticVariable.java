@@ -10,7 +10,7 @@ public class DistanceLinguisticVariable extends LinguisticVariable {
     public DistanceLinguisticVariable() {
         name = "długość lotu";
         column = "distance";
-        labels = Arrays.asList("bardzo krótki lot", "krótki lot", "średni lot", "długi lot", "bardzo długi lot");
+        labels = Arrays.asList("bardzo krótki lot", "krótki lot", "średnia długość lotu", "długi lot", "bardzo długi lot");
         membershipFunctions = new HashMap<>();
         membershipFunctions.put(labels.get(0), new SClassMembershipFunction(0, 100));
         membershipFunctions.put(labels.get(1), new SClassMembershipFunction(100, 700));

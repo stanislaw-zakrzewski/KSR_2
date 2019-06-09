@@ -10,7 +10,7 @@ public class CarrierLinguisticVariable extends LinguisticVariable {
     public CarrierLinguisticVariable() {
         name = "spóźnienie przez przewoźnika";
         column = "carrier_delay";
-        labels = Arrays.asList("mało spóźniony", "trochę spóźniony", "bardzo spóźniony");
+        labels = Arrays.asList("mało spóźniony przez przewoźnika", "trochę spóźniony przez przewoźnika", "bardzo spóźniony przez przewoźnika");
         membershipFunctions = new HashMap<>();
         membershipFunctions.put(labels.get(0), new SClassMembershipFunction(0, 50));
         membershipFunctions.put(labels.get(1), new SClassMembershipFunction(50, 200));
