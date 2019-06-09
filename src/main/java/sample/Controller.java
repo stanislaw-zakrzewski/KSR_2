@@ -14,8 +14,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import model.linguistic_quantifiers.LinguisticQuantifier;
 import model.linguistic_variables.LinguisticVariable;
 import model.sentences.GSentence;
+import model.sentences.KSentence;
 import model.sentences.YSentence;
 import sentence_generation.GSentenceGenerator;
+import sentence_generation.KSentenceGenerator;
 import sentence_generation.MeasuringQualityOfSentences;
 import sentence_generation.YSentenceGenerator;
 import sentence_building_blocks.linguistic_variables.AllLinguisticVariables;
@@ -93,7 +95,9 @@ public class Controller implements Initializable {
             }
         }
         if(typeK.isSelected()) {
-
+            for(KSentence kSentence : KSentenceGenerator.generateSentences(qList, sList)) {
+                data.add(new ViewSentence(kSentence.toString(), measuringQualityOfSentences.calculateQuality(kSentence)));
+            }
         }
 
         viewSentences.setItems(data);

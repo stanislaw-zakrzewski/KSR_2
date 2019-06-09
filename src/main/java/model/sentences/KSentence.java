@@ -30,8 +30,8 @@ public class KSentence implements Sentence {
 
     public float getCombinedSWCardinality() {
         float value = 0;
-        for (Float f : s.getFuzzySet().getValues()) {
-            value += Math.min(s.getFuzzySet().getMembership(f), w.getFuzzySet().getMembership(f));
+        for (int i = 0; i < s.getFuzzySet().getMemberships().size(); i++) {
+            value += Math.min(s.getFuzzySet().getMembershipForElement(i), w.getFuzzySet().getMembershipForElement(i));
         }
         return value;
     }
@@ -42,8 +42,8 @@ public class KSentence implements Sentence {
 
     public float getWSCombinedSupp() {
         float value = 0;
-        for (Float f : s.getFuzzySet().getValues()) {
-            if (s.getFuzzySet().getMembership(f) > 0 && w.getFuzzySet().getMembership(f) > 0) value += 1;
+        for (int i = 0; i < s.getFuzzySet().getSize(); i++) {
+            if (s.getFuzzySet().getMembershipForElement(i) > 0 && w.getFuzzySet().getMembershipForElement(i) > 0) value += 1;
         }
         return value;
     }
