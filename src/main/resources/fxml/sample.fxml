@@ -210,7 +210,7 @@
                            </Pane>
                            <Pane prefHeight="345.0" prefWidth="1200.0" GridPane.rowIndex="1">
                               <children>
-                                  <TableView fx:id="viewSentences" prefHeight="400.0" prefWidth="1200.0">
+                                  <TableView fx:id="viewSentences" prefHeight="372.0" prefWidth="1200.0">
                                       <columns>
                                           <TableColumn fx:id="sentence" prefWidth="1062.0" text="Zdanie" />
                                           <TableColumn fx:id="accuracy" prefWidth="137.0" text="Prawdziwość" />
