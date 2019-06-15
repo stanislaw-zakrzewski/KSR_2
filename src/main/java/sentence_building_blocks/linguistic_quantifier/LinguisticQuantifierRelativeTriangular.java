@@ -3,11 +3,11 @@ package sentence_building_blocks.linguistic_quantifier;
 import model.membership_functions.MembershipFunction;
 import model.linguistic_quantifiers.LinguisticQuantifier;
 
-public class LinguisticQuantifierExample implements LinguisticQuantifier {
+public class LinguisticQuantifierRelativeTriangular implements LinguisticQuantifier {
     private String name;
     private MembershipFunction membershipFunction;
 
-    public LinguisticQuantifierExample(String name, MembershipFunction membershipFunction) {
+    public LinguisticQuantifierRelativeTriangular(String name, MembershipFunction membershipFunction) {
         this.name = name;
         this.membershipFunction = membershipFunction;
     }

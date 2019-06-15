@@ -19,5 +19,7 @@ public class AllLinguisticVariables {
         linguisticVariables.add(new LinguisticVariableSecurityDelay());
         linguisticVariables.add(new LinguisticVariableNASDelay());
         linguisticVariables.add(new LinguisticVariableCarrierDelay());
+        linguisticVariables.add(new LinguisticVariableDayOfWeek());
+        linguisticVariables.add(new LinguisticVariableDayOfMonth());
     }
 }
