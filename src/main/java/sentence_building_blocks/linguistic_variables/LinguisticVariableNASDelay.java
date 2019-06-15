@@ -6,11 +6,11 @@ import sentence_building_blocks.membership_functions.SClassMembershipFunction;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class NASLinguisticVariable extends LinguisticVariable {
-    public NASLinguisticVariable() {
+public class LinguisticVariableNASDelay extends LinguisticVariable {
+    public LinguisticVariableNASDelay() {
         name = "spóźnienie przez National Aviation System";
         column = "nas_delay";
-        labels = Arrays.asList("mało spóźniony przez NAS", "trochę spóźniony przez NAS", "bardzo spóźniony przez NAS");
+        labels = Arrays.asList("lotami o małym spoźnieniu spowodowanym przez NAS", "lotami o średnim spoźnieniu spowodowanym przez przewodnika", "lotami o dużym spoźnieniu spowodowanym przez NAS");
         membershipFunctions = new HashMap<>();
         membershipFunctions.put(labels.get(0), new SClassMembershipFunction(0, 100));
         membershipFunctions.put(labels.get(1), new SClassMembershipFunction(100, 300));

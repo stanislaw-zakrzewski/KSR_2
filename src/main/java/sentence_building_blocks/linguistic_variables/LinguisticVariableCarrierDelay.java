@@ -6,11 +6,11 @@ import sentence_building_blocks.membership_functions.SClassMembershipFunction;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class CarrierLinguisticVariable extends LinguisticVariable {
-    public CarrierLinguisticVariable() {
+public class LinguisticVariableCarrierDelay extends LinguisticVariable {
+    public LinguisticVariableCarrierDelay() {
         name = "spóźnienie przez przewoźnika";
         column = "carrier_delay";
-        labels = Arrays.asList("mało spóźniony przez przewoźnika", "trochę spóźniony przez przewoźnika", "bardzo spóźniony przez przewoźnika");
+        labels = Arrays.asList("lotami o małym spoźnieniu spowodowanym przez przewodnika", "lotami o średnim spoźnieniu spowodowanym przez przewodnika", "lotami o dużym spoźnieniu spowodowanym przez przewodnika");
         membershipFunctions = new HashMap<>();
         membershipFunctions.put(labels.get(0), new SClassMembershipFunction(0, 50));
         membershipFunctions.put(labels.get(1), new SClassMembershipFunction(50, 200));

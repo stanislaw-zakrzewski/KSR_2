@@ -6,11 +6,11 @@ import sentence_building_blocks.membership_functions.SClassMembershipFunction;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class SecurityLinguisticVeriable extends LinguisticVariable {
-    public SecurityLinguisticVeriable() {
+public class LinguisticVariableSecurityDelay extends LinguisticVariable {
+    public LinguisticVariableSecurityDelay() {
         name = "spóźnienie przez bezpieczeństwo";
         column = "security_delay";
-        labels = Arrays.asList("mało spóźniony z powodu bezpieczeństwa", "trochę spóźniony z powodu bezpieczeństwa", "bardzo spóźniony z powodu bezpieczeństwa");
+        labels = Arrays.asList("lotami o małym spoźnieniu spowodowanym przez względy bezpieczeństwa", "lotami o średnim spoźnieniu spowodowanym przez względy bezpieczeństwa", "lotami o dużym spoźnieniu spowodowanym przez względy bezpieczeństwa");
         membershipFunctions = new HashMap<>();
         membershipFunctions.put(labels.get(0), new SClassMembershipFunction(0, 5));
         membershipFunctions.put(labels.get(1), new SClassMembershipFunction(5, 15));

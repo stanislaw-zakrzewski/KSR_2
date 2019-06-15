@@ -30,7 +30,66 @@ public class SClassMembershipFunction implements MembershipFunction {
     }
 
     @Override
-    public float getIntegralValue(float beggingValue, float endValue) {
+    public float getIntegralValue(float start, float stop) {
+        //integrate 2((x-a)/(b-a))^2 from a to (a-b)/2
+        float integral = 0;
+
+        float middle = (end - begging)/2;
+
+        if(start <= begging) {
+            if(stop <= begging) {
+                //start stop
+                integral += 0;
+            } else {
+                //start e
+                integral += 0;
+            }
+        }
+        if(start <= middle) {
+            if(start < begging) {
+                if(stop  <= middle) {
+                    //b stop
+                } else {
+                    //b middle
+                }
+            } else {
+                if(stop  <= middle) {
+                    //start stop
+                } else {
+                    //start middle
+                }
+            }
+        }
+
+        if(start <= middle) {
+            if(start < begging) {
+                if(stop  <= middle) {
+                    //b stop
+                } else {
+                    //b middle
+                }
+            } else {
+                if(stop  <= middle) {
+                    //start stop
+                } else {
+                    //start middle
+                }
+            }
+        }
+
+
+        if(stop > end) {
+            if(begging > end) {
+                //bv ev
+            } else {
+                //e ev
+            }
+        }
+
+
+
+
         return 0;//TODO no nie ma
+
     }
 }
