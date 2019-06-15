@@ -2,12 +2,12 @@ package sentence_building_blocks.membership_functions;
 
 import model.membership_functions.MembershipFunction;
 
-public class TriangleMembershipFunction implements MembershipFunction {
+public class MembershipFunctionTriangular implements MembershipFunction {
     private float beginning;
     private float middle;
     private float end;
 
-    public TriangleMembershipFunction(float beginning, float middle, float end) {
+    public MembershipFunctionTriangular(float beginning, float middle, float end) {
         this.beginning = beginning;
         this.middle = middle;
         this.end = end;

@@ -2,13 +2,13 @@ package sentence_building_blocks.membership_functions;
 
 import model.membership_functions.MembershipFunction;
 
-public class TrapezoidalMembershipFunction implements MembershipFunction {
+public class MembershipFunctionTrapezoidal implements MembershipFunction {
     private float begging;
     private float beggingTop;
     private float endTop;
     private float end;
 
-    public TrapezoidalMembershipFunction(float begging, float beggingTop, float endTop, float end) {
+    public MembershipFunctionTrapezoidal(float begging, float beggingTop, float endTop, float end) {
         this.begging = begging;
         this.beggingTop = beggingTop;
         this.endTop = endTop;

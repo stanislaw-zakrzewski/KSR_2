@@ -4,8 +4,6 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -131,22 +129,22 @@ public class Controller implements Initializable {
     public void changeFunction() {
         MembershipFunction membershipFunction = null;
         if (f1.isSelected()) {
-            membershipFunction = new TriangleMembershipFunction(Float.parseFloat(a_1.getText()), Float.parseFloat(b_1.getText()), Float.parseFloat(c_1.getText()));
+            membershipFunction = new MembershipFunctionTriangular(Float.parseFloat(a_1.getText()), Float.parseFloat(b_1.getText()), Float.parseFloat(c_1.getText()));
         }
         if (f2.isSelected()) {
-            membershipFunction = new TrapezoidalMembershipFunction(Float.parseFloat(a_2.getText()), Float.parseFloat(b_2.getText()), Float.parseFloat(c_2.getText()), Float.parseFloat(d_2.getText()));
+            membershipFunction = new MembershipFunctionTrapezoidal(Float.parseFloat(a_2.getText()), Float.parseFloat(b_2.getText()), Float.parseFloat(c_2.getText()), Float.parseFloat(d_2.getText()));
         }
         if (f3.isSelected()) {
-            membershipFunction = new GaussianMembershipFunction(Float.parseFloat(a_3.getText()), Float.parseFloat(b_3.getText()));
+            membershipFunction = new MembershipFunctionGaussian(Float.parseFloat(a_3.getText()), Float.parseFloat(b_3.getText()));
         }
         if (f4.isSelected()) {
-            membershipFunction = new BellidalMembershipFunction(Float.parseFloat(a_4.getText()), Float.parseFloat(b_4.getText()), Float.parseFloat(c_4.getText()));
+            membershipFunction = new MembershipFunctionBellShape(Float.parseFloat(a_4.getText()), Float.parseFloat(b_4.getText()), Float.parseFloat(c_4.getText()));
         }
         if (f5.isSelected()) {
-            membershipFunction = new GammaClassMembershipFunction(Float.parseFloat(a_5.getText()), Float.parseFloat(b_5.getText()));
+            membershipFunction = new MembershipFunctionGammaClass(Float.parseFloat(a_5.getText()), Float.parseFloat(b_5.getText()));
         }
         if (f6.isSelected()) {
-            membershipFunction = new SClassMembershipFunction(Float.parseFloat(a_6.getText()), Float.parseFloat(b_6.getText()));
+            membershipFunction = new MembershipFunctionSClass(Float.parseFloat(a_6.getText()), Float.parseFloat(b_6.getText()));
         }
         if (membershipFunction != null) {
             setFunction(membershipFunction);

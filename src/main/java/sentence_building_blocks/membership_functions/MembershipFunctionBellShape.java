@@ -2,12 +2,12 @@ package sentence_building_blocks.membership_functions;
 
 import model.membership_functions.MembershipFunction;
 
-public class BellidalMembershipFunction implements MembershipFunction {
+public class MembershipFunctionBellShape implements MembershipFunction {
     private float width;
     private float tilt;
     private float middle;
 
-    public BellidalMembershipFunction(float width, float tilt, float middle) {
+    public MembershipFunctionBellShape(float width, float tilt, float middle) {
         this.width = width;
         this.tilt = tilt;
         this.middle = middle;

@@ -2,11 +2,11 @@ package sentence_building_blocks.membership_functions;
 
 import model.membership_functions.MembershipFunction;
 
-public class SClassMembershipFunction implements MembershipFunction {
+public class MembershipFunctionSClass implements MembershipFunction {
     private float begging;
     private float end;
 
-    public SClassMembershipFunction(float begging, float end) {
+    public MembershipFunctionSClass(float begging, float end) {
         this.begging = begging;
         this.end = end;
     }

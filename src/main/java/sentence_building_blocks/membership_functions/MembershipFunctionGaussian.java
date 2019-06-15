@@ -3,11 +3,11 @@ package sentence_building_blocks.membership_functions;
 import model.membership_functions.MembershipFunction;
 import org.apache.commons.math3.special.Erf;
 
-public class GaussianMembershipFunction implements MembershipFunction {
+public class MembershipFunctionGaussian implements MembershipFunction {
     private float width;
     private float middle;
 
-    public GaussianMembershipFunction(float width, float middle) {
+    public MembershipFunctionGaussian(float width, float middle) {
         this.width = width;
         this.middle = middle;
     }

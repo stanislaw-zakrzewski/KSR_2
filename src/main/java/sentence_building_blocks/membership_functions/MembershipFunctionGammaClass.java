@@ -2,11 +2,11 @@ package sentence_building_blocks.membership_functions;
 
 import model.membership_functions.MembershipFunction;
 
-public class GammaClassMembershipFunction implements MembershipFunction {
+public class MembershipFunctionGammaClass implements MembershipFunction {
     private float begging;
     private float end;
 
-    public GammaClassMembershipFunction(float begging, float end) {
+    public MembershipFunctionGammaClass(float begging, float end) {
         this.begging = begging;
         this.end = end;
     }
