@@ -139,14 +139,8 @@ public class Controller implements Initializable {
         if (f3.isSelected()) {
             membershipFunction = new MembershipFunctionGaussian(Float.parseFloat(a_3.getText()), Float.parseFloat(b_3.getText()));
         }
-        if (f4.isSelected()) {
-            membershipFunction = new MembershipFunctionBellShape(Float.parseFloat(a_4.getText()), Float.parseFloat(b_4.getText()), Float.parseFloat(c_4.getText()));
-        }
         if (f5.isSelected()) {
             membershipFunction = new MembershipFunctionGammaClass(Float.parseFloat(a_5.getText()), Float.parseFloat(b_5.getText()));
-        }
-        if (f6.isSelected()) {
-            membershipFunction = new MembershipFunctionSClass(Float.parseFloat(a_6.getText()), Float.parseFloat(b_6.getText()));
         }
         if (membershipFunction != null) {
             setFunction(membershipFunction);
