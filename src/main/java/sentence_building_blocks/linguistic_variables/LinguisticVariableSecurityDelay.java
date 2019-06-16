@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 class LinguisticVariableSecurityDelay extends LinguisticVariable {
     LinguisticVariableSecurityDelay() {
-        name = "spóźnienie przez bezpieczeństwo";
+        name = "spóźnienie z powodu względów bezpieczeństwa";
         column = "security_delay";
         labels = Arrays.asList("lotami o małym spoźnieniu spowodowanym przez względy bezpieczeństwa", "lotami o średnim spoźnieniu spowodowanym przez względy bezpieczeństwa", "lotami o dużym spoźnieniu spowodowanym przez względy bezpieczeństwa");
         membershipFunctions = new HashMap<>();
