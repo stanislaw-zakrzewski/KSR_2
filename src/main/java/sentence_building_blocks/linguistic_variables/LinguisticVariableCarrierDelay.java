@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 class LinguisticVariableCarrierDelay extends LinguisticVariable {
     LinguisticVariableCarrierDelay() {
-        name = "spóźnienie przez przewoźnika";
+        name = "spóźnienie z powodu przewoźnika";
         column = "carrier_delay";
         labels = Arrays.asList("lotami o małym spoźnieniu spowodowanym przez przewodnika", "lotami o średnim spoźnieniu spowodowanym przez przewodnika", "lotami o dużym spoźnieniu spowodowanym przez przewodnika");
         membershipFunctions = new HashMap<>();
