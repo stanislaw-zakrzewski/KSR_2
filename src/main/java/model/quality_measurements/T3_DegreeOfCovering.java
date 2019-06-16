@@ -10,7 +10,7 @@ public class T3_DegreeOfCovering implements QualityMeasurement {
         if (sentence.getType() == SentenceType.K) {
             KSentence kSentence = (KSentence) sentence;
             value = kSentence.getWSCombinedSupp() / kSentence.getWCombinedSupp();
-        }
-        return value;
+            return value;
+        } else return 1;
     }
 }

@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 class LinguisticVariableNASDelay extends LinguisticVariable {
     LinguisticVariableNASDelay() {
-        name = "spóźnienie przez National Aviation System";
+        name = "spóźnienie z powodu National Aviation System";
         column = "nas_delay";
         labels = Arrays.asList("lotami o małym spoźnieniu spowodowanym przez NAS", "lotami o średnim spoźnieniu spowodowanym przez przewodnika", "lotami o dużym spoźnieniu spowodowanym przez NAS");
         membershipFunctions = new HashMap<>();
