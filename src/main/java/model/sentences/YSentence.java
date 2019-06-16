@@ -38,6 +38,10 @@ public class YSentence implements Sentence {
 
     @Override
     public String toString() {
-        return q.getName() + " lotów jest " + sLabel;
+        String sentence = q.getName();
+        if(q.isAbsolute()) {
+            sentence += " "  + q.getValue();
+        }
+        return sentence + " lotów jest " + sLabel;
     }
 }

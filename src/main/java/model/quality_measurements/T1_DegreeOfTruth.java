@@ -13,15 +13,27 @@ public class T1_DegreeOfTruth implements QualityMeasurement {
         switch (sentence.getType()) {
             case Y:
                 YSentence ySentence = (YSentence) sentence;
-                value = ySentence.getQ().calculateMembership(ySentence.getSFuzzySet().getCardinality() / ySentence.getSFuzzySet().getSize());
+                if(ySentence.getQ().isAbsolute()) {
+                    value = ySentence.getQ().calculateMembership(ySentence.getSFuzzySet().getCardinality());
+                } else {
+                    value = ySentence.getQ().calculateMembership(ySentence.getSFuzzySet().getCardinality() / ySentence.getSFuzzySet().getSize());
+                }
                 break;
             case G:
                 GSentence gSentence = (GSentence) sentence;
-                value = gSentence.getQ().calculateMembership(gSentence.getCombinedSCardinality() / gSentence.getSSize());
+                if(gSentence.getQ().isAbsolute()) {
+                    value = gSentence.getQ().calculateMembership(gSentence.getCombinedSCardinality());
+                } else {
+                    value = gSentence.getQ().calculateMembership(gSentence.getCombinedSCardinality() / gSentence.getSSize());
+                }
                 break;
             case K:
                 KSentence kSentence = (KSentence) sentence;
-                value = kSentence.getQ().calculateMembership(kSentence.getCombinedSWCardinality() / kSentence.getCombinedWCardinality());
+                if(kSentence.getQ().isAbsolute()) {
+                    value = kSentence.getQ().calculateMembership(kSentence.getCombinedSWCardinality());
+                } else {
+                    value = kSentence.getQ().calculateMembership(kSentence.getCombinedSWCardinality() / kSentence.getCombinedWCardinality());
+                }
                 break;
         }
         return value;

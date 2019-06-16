@@ -6,4 +6,6 @@ public interface LinguisticQuantifier {
     float getCardinality();
     float getSupp();
     float getSize();
+    boolean isAbsolute();
+    int getValue();
 }

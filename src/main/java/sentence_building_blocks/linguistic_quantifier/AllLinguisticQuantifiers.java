@@ -13,12 +13,15 @@ public class AllLinguisticQuantifiers {
     @Getter
     LinkedList<LinguisticQuantifier> linguisticQuantifiers;
 
-    public AllLinguisticQuantifiers() {
+    public AllLinguisticQuantifiers(int X) {
         linguisticQuantifiers = new LinkedList<>();
-        linguisticQuantifiers.add(new LinguisticQuantifierRelativeTriangular("mało", new MembershipFunctionTriangular(0,0.3f,0.6f)));
-        linguisticQuantifiers.add(new LinguisticQuantifierRelativeTriangular("dużo", new MembershipFunctionTriangular(0.4f,0.7f,1)));
-        linguisticQuantifiers.add(new LinguisticQuantifierRelativeTriangular("ponad połowa", new MembershipFunctionGammaClass(0.4f,0.5f)));
-        linguisticQuantifiers.add(new LinguisticQuantifierRelativeTriangular("mniej niż połowa", new MembershipFunctionTrapezoidal(0,0.001f, 0.5f, 0.6f)));
-        linguisticQuantifiers.add(new LinguisticQuantifierRelativeTriangular("około połowy", new MembershipFunctionGaussian(0.4f,0.5f)));
+        linguisticQuantifiers.add(new LinguisticQuantifierRelative("mało", new MembershipFunctionTriangular(0, 0.3f, 0.6f)));
+        linguisticQuantifiers.add(new LinguisticQuantifierRelative("dużo", new MembershipFunctionTriangular(0.4f, 0.7f, 1)));
+        linguisticQuantifiers.add(new LinguisticQuantifierRelative("ponad połowa", new MembershipFunctionGammaClass(0.4f, 0.5f)));
+        linguisticQuantifiers.add(new LinguisticQuantifierRelative("mniej niż połowa", new MembershipFunctionTrapezoidal(0, 0.001f, 0.5f, 0.6f)));
+        linguisticQuantifiers.add(new LinguisticQuantifierRelative("około połowy", new MembershipFunctionGaussian(0.2f, 0.5f)));
+        linguisticQuantifiers.add(new LinguisticQuantifierAbsolute("mniej niż", new MembershipFunctionTrapezoidal(0, 0.001f, X, X * 1.1f), X));
+        linguisticQuantifiers.add(new LinguisticQuantifierAbsolute("więcej niż", new MembershipFunctionGammaClass(X * 0.9f, X), X));
+        linguisticQuantifiers.add(new LinguisticQuantifierAbsolute("około", new MembershipFunctionGaussian(X * 0.1f, X), X));
     }
 }

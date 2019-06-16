@@ -67,7 +67,11 @@ public class KSentence implements Sentence {
 
     @Override
     public String toString() {
-        return q.getName() + " lotów, które są " + w.toString() + " jest " + s.toString();
+        String sentence = q.getName();
+        if(q.isAbsolute()) {
+            sentence += " "  + q.getValue();
+        }
+        return sentence + " lotów, które są " + w.toString() + " jest " + s.toString();
     }
 
 

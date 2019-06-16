@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 public class Controller implements Initializable {
     private final ObservableList<ViewSentence> data = FXCollections.observableArrayList();
 
-    private AllLinguisticQuantifiers allLinguisticQuantifiers = new AllLinguisticQuantifiers();
+    private AllLinguisticQuantifiers allLinguisticQuantifiers;
     private AllLinguisticVariables allLinguisticVariables = new AllLinguisticVariables();
 
     private List<String> selectedLinguisticQuantifiers = new LinkedList<>();
@@ -48,7 +48,7 @@ public class Controller implements Initializable {
     public ComboBox<String> nameZmienna, nameEtykieta;
 
     @FXML
-    public TextArea fileName, w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11;
+    public TextArea fileName, w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, xValue;
     @FXML
     public TextField a_1, a_2, a_3, a_4, a_5, a_6, b_1, b_2, b_3, b_4, b_5, b_6, c_1, c_2, c_4, d_2;
 
@@ -68,6 +68,7 @@ public class Controller implements Initializable {
         sentence.setCellValueFactory(new PropertyValueFactory<>("sentence"));
         accuracy.setCellValueFactory(new PropertyValueFactory<>("accuracy"));
 
+        allLinguisticQuantifiers = new AllLinguisticQuantifiers(Integer.parseInt(xValue.getText()));
         for (LinguisticQuantifier lq : allLinguisticQuantifiers.getLinguisticQuantifiers()) {
             qListView.getItems().add(lq.getName());
         }
@@ -84,6 +85,7 @@ public class Controller implements Initializable {
     public void getSentence() {
         data.clear();
 
+        allLinguisticQuantifiers = new AllLinguisticQuantifiers(Integer.parseInt(xValue.getText()));
         List<LinguisticQuantifier> qList = allLinguisticQuantifiers.getLinguisticQuantifiers().stream().filter(q -> selectedLinguisticQuantifiers.contains(q.getName())).collect(Collectors.toList());
         List<LinguisticVariable> sList = allLinguisticVariables.getLinguisticVariables().stream().filter(s -> selectedLinguisticVariables.contains(s.getName())).collect(Collectors.toList());
         List<Boolean> selectedMeasurements = selectedQualityMeasurements.stream().map(CheckBox::isSelected).collect(Collectors.toList());

@@ -3,11 +3,11 @@ package sentence_building_blocks.linguistic_quantifier;
 import model.membership_functions.MembershipFunction;
 import model.linguistic_quantifiers.LinguisticQuantifier;
 
-public class LinguisticQuantifierRelativeTriangular implements LinguisticQuantifier {
+public class LinguisticQuantifierRelative implements LinguisticQuantifier {
     private String name;
     private MembershipFunction membershipFunction;
 
-    public LinguisticQuantifierRelativeTriangular(String name, MembershipFunction membershipFunction) {
+    LinguisticQuantifierRelative(String name, MembershipFunction membershipFunction) {
         this.name = name;
         this.membershipFunction = membershipFunction;
     }
@@ -24,7 +24,7 @@ public class LinguisticQuantifierRelativeTriangular implements LinguisticQuantif
 
     @Override
     public float getCardinality() {
-        return membershipFunction.getIntegralValue(0,1);
+        return membershipFunction.getIntegralValue(0, 1);
     }
 
     @Override
@@ -35,5 +35,15 @@ public class LinguisticQuantifierRelativeTriangular implements LinguisticQuantif
     @Override
     public float getSize() {
         return 1;
+    }
+
+    @Override
+    public boolean isAbsolute() {
+        return false;
+    }
+
+    @Override
+    public int getValue() {
+        return 0;
     }
 }

@@ -42,6 +42,10 @@ public class GSentence implements Sentence{
 
     @Override
     public String toString() {
-        return q.getName() + " lotów jest " + s.toString();
+        String sentence = q.getName();
+        if(q.isAbsolute()) {
+            sentence += " "  + q.getValue();
+        }
+        return sentence + " lotów jest " + s.toString();
     }
 }
