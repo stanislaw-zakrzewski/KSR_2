@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 class LinguisticVariableDayOfWeek extends LinguisticVariable {
     LinguisticVariableDayOfWeek() {
-        name = "dzień tygodnia";
+        name = "wystąpienie w tygodniu";
         column = "day_of_week";
         labels = Arrays.asList("lotami, które odbyły się na początku tygodnia ", "lotami, które odbyły się w połowie tygodnia", "lotami, które odbyły się pod koniec tygodnia");
         membershipFunctions = new HashMap<>();
