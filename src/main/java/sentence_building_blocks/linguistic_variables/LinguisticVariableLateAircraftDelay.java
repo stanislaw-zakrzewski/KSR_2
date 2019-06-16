@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 class LinguisticVariableLateAircraftDelay extends LinguisticVariable {
     LinguisticVariableLateAircraftDelay() {
-        name = "spóźnienie przez późno dotarty samolot";
+        name = "spóźnienie spowodowane późnym przylotem samolotu";
         column = "late_aircraft_delay";
         labels = Arrays.asList("lotami o małym spoźnieniu spowodowanym przez opóźnienie w przylocie samolotu", "lotami o średnim spoźnieniu spowodowanym przez opóźnienie w przylocie samolotu", "lotami o dużym spoźnieniu spowodowanym przez opóźnienie w przylocie samolotu");
         membershipFunctions = new HashMap<>();
