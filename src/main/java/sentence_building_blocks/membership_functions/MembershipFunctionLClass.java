@@ -8,14 +8,17 @@ public class MembershipFunctionLClass implements MembershipFunction {
     private float minimumValue;
     private float maximumValue;
 
-    public MembershipFunctionLClass(float a, float b) {
-        this.a = a;
-        this.b = b;
-    }
-
     public MembershipFunctionLClass(float a, float b, float minimumValue, float maximumValue) {
-        this.a = a;
-        this.b = b;
+        if (a < minimumValue) {
+            this.a = minimumValue;
+        } else {
+            this.a = a;
+        }
+        if (b > maximumValue) {
+            this.b = maximumValue;
+        } else {
+            this.b = b;
+        }
         this.minimumValue = minimumValue;
         this.maximumValue = maximumValue;
     }
@@ -29,12 +32,12 @@ public class MembershipFunctionLClass implements MembershipFunction {
 
     @Override
     public float getSupport() {
-        return 0;//TODO
+        return a - minimumValue;
     }
 
     @Override
     public float getIntegralValue() {
-        return 0; //TODO
+        return a - minimumValue + (b - a) / 2;
     }
 
     @Override

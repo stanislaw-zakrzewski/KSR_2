@@ -10,14 +10,7 @@ public class MembershipFunctionTrapezoidal implements MembershipFunction {
     private float minimumValue;
     private float maximumValue;
 
-    public MembershipFunctionTrapezoidal(float a, float b, float c, float d) {
-        this.a = a;
-        this.b = b;
-        this.c = c;
-        this.d = d;
-    }
-
-    public MembershipFunctionTrapezoidal(float a, float b, float c, float d, float minimumValue, float maximumValue) {
+    public MembershipFunctionTrapezoidal(float a, float b, float c, float d, float minimumValue, float maximumValue) {//TODO sprawdzenia czy mniejsze/większe
         this.a = a;
         this.b = b;
         this.c = c;
@@ -36,26 +29,17 @@ public class MembershipFunctionTrapezoidal implements MembershipFunction {
     }
 
     @Override
-    public float getSupport() {//TODO check
-        /*float b, e;
-        if (beggingValue > a) b = beggingValue;
-        else b = a;
-        if (endValue < d) e = endValue;
-        else e = d;
-        return e - b;*/
-        return 1;
+    public float getSupport() {
+        return d - a;
     }
 
     @Override
-    public float getIntegralValue() {//TODO check
-        /*float b, e;
-        if (beggingValue > a) b = beggingValue;
-        else b = a;
-        if (endValue < d) e = endValue;
-        else e = d;
-
-        return ((c - this.b) + (e - b)) / 2;*/
-        return 1;
+    public float getIntegralValue() {
+        float integral = 0;
+        integral += (b - a) / 2;
+        integral += c - b;
+        integral += (d - c) / 2;
+        return integral;
     }
 
     @Override

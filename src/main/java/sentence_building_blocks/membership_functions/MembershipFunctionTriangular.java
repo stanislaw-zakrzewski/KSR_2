@@ -15,7 +15,7 @@ public class MembershipFunctionTriangular implements MembershipFunction {
         this.c = c;
     }
 
-    public MembershipFunctionTriangular(float a, float b, float c, float minimumValue, float maximumValue) {
+    public MembershipFunctionTriangular(float a, float b, float c, float minimumValue, float maximumValue) {//TODO check
         this.a = a;
         this.b = b;
         this.c = c;
@@ -32,25 +32,13 @@ public class MembershipFunctionTriangular implements MembershipFunction {
     }
 
     @Override
-    public float getSupport() {//TODO check
-        /*float b, e;
-        if (beggingValue > a) b = beggingValue;
-        else b = a;
-        if (endValue < c) e = endValue;
-        else e = c;
-        return e - b;*/
-        return 1;
+    public float getSupport() {
+        return c - a;
     }
 
     @Override
-    public float getIntegralValue() {//TODO check
-        /*float b, e;
-        if (beggingValue > a) b = beggingValue;
-        else b = a;
-        if (endValue < c) e = endValue;
-        else e = c;
-        return ((e - b) * (calculateMembership(this.b) - 0)) / 2;*/
-        return 1;
+    public float getIntegralValue() {
+        return (c - a) / 2;
     }
 
     @Override

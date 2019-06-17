@@ -14,8 +14,16 @@ public class MembershipFunctionGammaClass implements MembershipFunction {
     }
 
     public MembershipFunctionGammaClass(float a, float b, float minimumValue, float maximumValue) {
-        this.a = a;
-        this.b = b;
+        if (a < minimumValue) {
+            this.a = minimumValue;
+        } else {
+            this.a = a;
+        }
+        if (b > maximumValue) {
+            this.b = maximumValue;
+        } else {
+            this.b = b;
+        }
         this.maximumValue = maximumValue;
         this.minimumValue = minimumValue;
     }
@@ -28,25 +36,21 @@ public class MembershipFunctionGammaClass implements MembershipFunction {
     }
 
     @Override
-    public float getSupport() {//TODO check
-       /* float b;
-        if (beggingValue > a) b = beggingValue;
-        else b = a;
-        return endValue - b;*/
-        return 1;
+    public float getSupport() {
+        if (a < maximumValue) {
+            if (a > minimumValue) {
+                return maximumValue - a;
+            } else {
+                return maximumValue - minimumValue;
+            }
+        } else {
+            return 0;
+        }
     }
 
     @Override
-    public float getIntegralValue() {//TODO check
-        /*float b;
-        if (beggingValue > a) b = beggingValue;
-        else b = a;
-
-        float tp = ((endValue - b) * (calculateMembership(endValue) - calculateMembership(beggingValue))) / 2;
-        float pp = (endValue - this.b);
-        return tp + pp;
-         */
-        return 1;
+    public float getIntegralValue() {
+        return (b - a) / 2 + maximumValue - b;
     }
 
     @Override

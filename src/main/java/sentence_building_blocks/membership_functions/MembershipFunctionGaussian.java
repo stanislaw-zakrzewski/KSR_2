@@ -9,11 +9,6 @@ public class MembershipFunctionGaussian implements MembershipFunction {
     private float minimumValue;
     private float maximumValue;
 
-    public MembershipFunctionGaussian(float a, float b) {
-        this.a = a;
-        this.b = b;
-    }
-
     public MembershipFunctionGaussian(float a, float b, float minimumValue, float maximumValue) {
         this.a = a;
         this.b = b;
