@@ -18,11 +18,6 @@ public class GSentence implements Sentence{
         this.s = s;
     }
 
-    public void process(List<Float> x) {
-        s.setValues(x);
-        s.getFuzzySet();
-    }
-
     public List<FuzzySet> getSFuzzySets() {
         return s.getFuzzySets();
     }
