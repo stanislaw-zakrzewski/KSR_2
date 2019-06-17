@@ -10,6 +10,13 @@ public class MembershipFunctionTrapezoidal implements MembershipFunction {
     private float minimumValue;
     private float maximumValue;
 
+    public MembershipFunctionTrapezoidal(float a, float b, float c, float d) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.d = d;
+    }
+
     public MembershipFunctionTrapezoidal(float a, float b, float c, float d, float minimumValue, float maximumValue) {
         this.a = a;
         this.b = b;

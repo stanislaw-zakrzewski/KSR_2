@@ -8,6 +8,11 @@ public class MembershipFunctionLClass implements MembershipFunction {
     private float minimumValue;
     private float maximumValue;
 
+    public MembershipFunctionLClass(float a, float b) {
+        this.a = a;
+        this.b = b;
+    }
+
     public MembershipFunctionLClass(float a, float b, float minimumValue, float maximumValue) {
         this.a = a;
         this.b = b;

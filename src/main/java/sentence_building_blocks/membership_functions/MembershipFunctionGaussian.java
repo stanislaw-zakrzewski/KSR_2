@@ -4,10 +4,15 @@ import model.membership_functions.MembershipFunction;
 import org.apache.commons.math3.special.Erf;
 
 public class MembershipFunctionGaussian implements MembershipFunction {
-    private float a;
-    private float b;
+    private float a; //szerokość ale jakaś dziwna, dla 2 jest 10 dla 4 jest 20 itp.
+    private float b; //middle
     private float minimumValue;
     private float maximumValue;
+
+    public MembershipFunctionGaussian(float a, float b) {
+        this.a = a;
+        this.b = b;
+    }
 
     public MembershipFunctionGaussian(float a, float b, float minimumValue, float maximumValue) {
         this.a = a;
@@ -28,12 +33,11 @@ public class MembershipFunctionGaussian implements MembershipFunction {
     }
 
     @Override
-    public float getIntegralValue() {//TODO check
-        /* double end = -0.5 * Math.sqrt(Math.PI) * b * Erf.erf((b - endValue) / a);
-        double beg = -0.5 * Math.sqrt(Math.PI) * b * Erf.erf((b - beggingValue) / a);
+    public float getIntegralValue() {
+        double end = -0.5 * Math.sqrt(Math.PI) * a * Erf.erf((b - maximumValue) / a);
+        double beg = -0.5 * Math.sqrt(Math.PI) * a * Erf.erf((b - minimumValue) / a);
 
-        return (float) (end - beg);*/
-        return 1;
+        return (float) (end - beg);
     }
 
     @Override
