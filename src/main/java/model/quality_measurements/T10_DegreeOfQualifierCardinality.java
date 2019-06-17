@@ -12,7 +12,7 @@ public class T10_DegreeOfQualifierCardinality implements QualityMeasurement{
             KSentence kSentence = (KSentence) sentence;
             value = 1;
             for (FuzzySet fs : kSentence.getWFuzzySets()) {
-                value *= (fs.getCardinality() / fs.getSize());
+                value *= (fs.getMembershipFunction().getIntegralValue() / fs.getMembershipFunction().getRange());
             }
             value = 1 - (float) Math.pow(value, 1 / kSentence.getWFuzzySets().size());
         }

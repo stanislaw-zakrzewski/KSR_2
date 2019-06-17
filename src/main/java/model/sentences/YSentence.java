@@ -12,6 +12,7 @@ public class YSentence implements Sentence {
     private LinguisticQuantifier q;
     @Getter
     private LinguisticVariable s;
+    @Getter
     private String sLabel;
     @Getter
     private FuzzySet sFuzzySet;

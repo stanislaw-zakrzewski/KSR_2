@@ -13,6 +13,7 @@ public class LinguisticVariable {
     protected List<String> labels;
     @Getter
     protected String column;
+    @Getter
     protected Map<String, MembershipFunction> membershipFunctions;
 
     public MembershipFunction getMembershipFunctionForLabel(String label) {

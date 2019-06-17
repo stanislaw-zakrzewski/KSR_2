@@ -24,7 +24,7 @@ public class InsertionDB {
 
     public Boolean insertDB(Connection connection, List<List<String>> records) {
         Collections.shuffle(records);
-        for (int i = 1; i < 11000; i++) {
+        for (int i = 0; i < records.size(); i++) {
             if (connection != null) {
                 PreparedStatement ps = null;
                 String sql = "INSERT INTO flights VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";

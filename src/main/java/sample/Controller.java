@@ -131,16 +131,16 @@ public class Controller implements Initializable {
     public void changeFunction() {
         MembershipFunction membershipFunction = null;
         if (f1.isSelected()) {
-            membershipFunction = new MembershipFunctionTriangular(Float.parseFloat(a_1.getText()), Float.parseFloat(b_1.getText()), Float.parseFloat(c_1.getText()));
+            membershipFunction = new MembershipFunctionTriangular(Float.parseFloat(a_1.getText()), Float.parseFloat(b_1.getText()), Float.parseFloat(c_1.getText()),0,1);
         }
         if (f2.isSelected()) {
-            membershipFunction = new MembershipFunctionTrapezoidal(Float.parseFloat(a_2.getText()), Float.parseFloat(b_2.getText()), Float.parseFloat(c_2.getText()), Float.parseFloat(d_2.getText()));
+            membershipFunction = new MembershipFunctionTrapezoidal(Float.parseFloat(a_2.getText()), Float.parseFloat(b_2.getText()), Float.parseFloat(c_2.getText()), Float.parseFloat(d_2.getText()),0,1);
         }
         if (f3.isSelected()) {
-            membershipFunction = new MembershipFunctionGaussian(Float.parseFloat(a_3.getText()), Float.parseFloat(b_3.getText()));
+            membershipFunction = new MembershipFunctionGaussian(Float.parseFloat(a_3.getText()), Float.parseFloat(b_3.getText()),0,1);
         }
         if (f5.isSelected()) {
-            membershipFunction = new MembershipFunctionGammaClass(Float.parseFloat(a_5.getText()), Float.parseFloat(b_5.getText()));
+            membershipFunction = new MembershipFunctionGammaClass(Float.parseFloat(a_5.getText()), Float.parseFloat(b_5.getText()),0,1);
         }
         if (membershipFunction != null) {
             setFunction(membershipFunction);

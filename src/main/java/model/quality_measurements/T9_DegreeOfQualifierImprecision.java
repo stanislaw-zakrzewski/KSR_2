@@ -12,7 +12,7 @@ public class T9_DegreeOfQualifierImprecision implements QualityMeasurement {
             KSentence kSentence = (KSentence) sentence;
             value = 1;
             for (FuzzySet fs : kSentence.getWFuzzySets()) {
-                value *= (fs.getSupp() / fs.getSize());
+                value *= (fs.getMembershipFunction().getSupport() / fs.getMembershipFunction().getRange());
             }
             value = 1 - (float) Math.pow(value, 1 / kSentence.getWFuzzySets().size());
         }

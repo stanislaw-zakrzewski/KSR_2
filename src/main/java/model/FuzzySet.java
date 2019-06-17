@@ -9,6 +9,7 @@ import java.util.List;
 public class FuzzySet {
     @Getter
     private LinkedList<FuzzyPair> fuzzySet;
+    @Getter
     private MembershipFunction membershipFunction;
     @Getter
     private List<Float> values;

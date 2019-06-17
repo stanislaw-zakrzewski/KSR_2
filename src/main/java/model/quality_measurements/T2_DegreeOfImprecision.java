@@ -14,13 +14,13 @@ public class T2_DegreeOfImprecision implements QualityMeasurement {
         switch (sentence.getType()) {
             case Y:
                 YSentence ySentence = (YSentence) sentence;
-                value = 1 - (ySentence.getSFuzzySet().getSupp() / ySentence.getSFuzzySet().getSize());
+                value = 1 - (ySentence.getSFuzzySet().getMembershipFunction().getSupport() / ySentence.getSFuzzySet().getMembershipFunction().getRange());
                 break;
             case G:
                 GSentence gSentence = (GSentence) sentence;
                 value = 1;
                 for (FuzzySet set : gSentence.getSFuzzySets()) {
-                    value *= (set.getSupp() / set.getSize());
+                    value *= (set.getMembershipFunction().getSupport() / set.getMembershipFunction().getRange());
                 }
                 value = (float) (1 - Math.pow(value, (1.0f / gSentence.getSFuzzySets().size())));
                 break;
@@ -28,7 +28,7 @@ public class T2_DegreeOfImprecision implements QualityMeasurement {
                 KSentence kSentence = (KSentence) sentence;
                 value = 1;
                 for (FuzzySet set : kSentence.getSFuzzySets()) {
-                    value *= (set.getSupp() / set.getSize());
+                    value *= (set.getMembershipFunction().getSupport() / set.getMembershipFunction().getRange());
                 }
                 value = (float) (1 - Math.pow(value, (1.0f / kSentence.getSFuzzySets().size())));
                 break;

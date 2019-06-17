@@ -24,17 +24,17 @@ public class LinguisticQuantifierRelative implements LinguisticQuantifier {
 
     @Override
     public float getCardinality() {
-        return membershipFunction.getIntegralValue(0, 1);
+        return membershipFunction.getIntegralValue();
     }
 
     @Override
     public float getSupp() {
-        return membershipFunction.getSupport(0, 1);
+        return membershipFunction.getSupport();
     }
 
     @Override
     public float getSize() {
-        return 1;
+        return membershipFunction.getRange();
     }
 
     @Override
