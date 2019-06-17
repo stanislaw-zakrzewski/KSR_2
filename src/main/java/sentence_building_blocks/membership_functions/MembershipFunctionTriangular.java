@@ -9,6 +9,12 @@ public class MembershipFunctionTriangular implements MembershipFunction {
     private float minimumValue;
     private float maximumValue;
 
+    public MembershipFunctionTriangular(float a, float b, float c) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+
     public MembershipFunctionTriangular(float a, float b, float c, float minimumValue, float maximumValue) {
         this.a = a;
         this.b = b;
