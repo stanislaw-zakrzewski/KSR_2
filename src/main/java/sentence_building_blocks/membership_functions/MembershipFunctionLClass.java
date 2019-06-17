@@ -23,12 +23,12 @@ public class MembershipFunctionLClass implements MembershipFunction {
     }
 
     @Override
-    public float getSupport(float beggingValue, float endValue) {
+    public float getSupport() {
         return 0;//TODO
     }
 
     @Override
-    public float getIntegralValue(float beggingValue, float endValue) {
+    public float getIntegralValue() {
         return 0; //TODO
     }
 

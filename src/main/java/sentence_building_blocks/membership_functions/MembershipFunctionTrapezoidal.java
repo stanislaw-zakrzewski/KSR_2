@@ -29,24 +29,26 @@ public class MembershipFunctionTrapezoidal implements MembershipFunction {
     }
 
     @Override
-    public float getSupport(float beggingValue, float endValue) {//TODO check
-        float b, e;
+    public float getSupport() {//TODO check
+        /*float b, e;
         if (beggingValue > a) b = beggingValue;
         else b = a;
         if (endValue < d) e = endValue;
         else e = d;
-        return e - b;
+        return e - b;*/
+        return 1;
     }
 
     @Override
-    public float getIntegralValue(float beggingValue, float endValue) {//TODO check
-        float b, e;
+    public float getIntegralValue() {//TODO check
+        /*float b, e;
         if (beggingValue > a) b = beggingValue;
         else b = a;
         if (endValue < d) e = endValue;
         else e = d;
 
-        return ((c - this.b) + (e - b)) / 2;
+        return ((c - this.b) + (e - b)) / 2;*/
+        return 1;
     }
 
     @Override

@@ -23,22 +23,25 @@ public class MembershipFunctionGammaClass implements MembershipFunction {
     }
 
     @Override
-    public float getSupport(float beggingValue, float endValue) {//TODO check
-        float b;
+    public float getSupport() {//TODO check
+       /* float b;
         if (beggingValue > a) b = beggingValue;
         else b = a;
-        return endValue - b;
+        return endValue - b;*/
+        return 1;
     }
 
     @Override
-    public float getIntegralValue(float beggingValue, float endValue) {//TODO check
-        float b;
+    public float getIntegralValue() {//TODO check
+        /*float b;
         if (beggingValue > a) b = beggingValue;
         else b = a;
 
         float tp = ((endValue - b) * (calculateMembership(endValue) - calculateMembership(beggingValue))) / 2;
         float pp = (endValue - this.b);
         return tp + pp;
+         */
+        return 1;
     }
 
     @Override

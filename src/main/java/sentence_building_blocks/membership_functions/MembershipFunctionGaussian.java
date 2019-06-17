@@ -22,17 +22,18 @@ public class MembershipFunctionGaussian implements MembershipFunction {
     }
 
     @Override
-    public float getSupport(float beggingValue, float endValue) {//TODO check
+    public float getSupport() {//TODO check
         float x = (a + b) / 4;
         return (b + x) - (b - x);
     }
 
     @Override
-    public float getIntegralValue(float beggingValue, float endValue) {//TODO check
-        double end = -0.5 * Math.sqrt(Math.PI) * b * Erf.erf((b - endValue) / a);
+    public float getIntegralValue() {//TODO check
+        /* double end = -0.5 * Math.sqrt(Math.PI) * b * Erf.erf((b - endValue) / a);
         double beg = -0.5 * Math.sqrt(Math.PI) * b * Erf.erf((b - beggingValue) / a);
 
-        return (float) (end - beg);
+        return (float) (end - beg);*/
+        return 1;
     }
 
     @Override

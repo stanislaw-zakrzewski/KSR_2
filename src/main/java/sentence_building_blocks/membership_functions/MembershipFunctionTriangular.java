@@ -26,23 +26,25 @@ public class MembershipFunctionTriangular implements MembershipFunction {
     }
 
     @Override
-    public float getSupport(float beggingValue, float endValue) {//TODO check
-        float b, e;
+    public float getSupport() {//TODO check
+        /*float b, e;
         if (beggingValue > a) b = beggingValue;
         else b = a;
         if (endValue < c) e = endValue;
         else e = c;
-        return e - b;
+        return e - b;*/
+        return 1;
     }
 
     @Override
-    public float getIntegralValue(float beggingValue, float endValue) {//TODO check
-        float b, e;
+    public float getIntegralValue() {//TODO check
+        /*float b, e;
         if (beggingValue > a) b = beggingValue;
         else b = a;
         if (endValue < c) e = endValue;
         else e = c;
-        return ((e - b) * (calculateMembership(this.b) - 0)) / 2;
+        return ((e - b) * (calculateMembership(this.b) - 0)) / 2;*/
+        return 1;
     }
 
     @Override
