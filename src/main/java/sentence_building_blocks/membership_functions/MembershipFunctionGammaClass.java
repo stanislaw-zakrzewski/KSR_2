@@ -3,38 +3,46 @@ package sentence_building_blocks.membership_functions;
 import model.membership_functions.MembershipFunction;
 
 public class MembershipFunctionGammaClass implements MembershipFunction {
-    private float begging;
-    private float end;
+    private float a;
+    private float b;
+    private float minimumValue;
+    private float maximumValue;
 
-    public MembershipFunctionGammaClass(float begging, float end) {
-        this.begging = begging;
-        this.end = end;
+    public MembershipFunctionGammaClass(float a, float b, float minimumValue, float maximumValue) {
+        this.a = a;
+        this.b = b;
+        this.maximumValue = maximumValue;
+        this.minimumValue = minimumValue;
     }
 
     @Override
     public float calculateMembership(float value) {
-        if (value <= begging) return 0;
-        else if (begging < value && value <= end) return ((value - begging) / (end - begging));
+        if (value <= a) return 0;
+        else if (a < value && value <= b) return ((value - a) / (b - a));
         else return 1;
     }
 
     @Override
-    public float getSupport(float beggingValue, float endValue) {
+    public float getSupport(float beggingValue, float endValue) {//TODO check
         float b;
-        if (beggingValue > begging) b = beggingValue;
-        else b = begging;
+        if (beggingValue > a) b = beggingValue;
+        else b = a;
         return endValue - b;
     }
 
     @Override
-    public float getIntegralValue(float beggingValue, float endValue) {
+    public float getIntegralValue(float beggingValue, float endValue) {//TODO check
         float b;
-        if (beggingValue > begging) b = beggingValue;
-        else b = begging;
+        if (beggingValue > a) b = beggingValue;
+        else b = a;
 
         float tp = ((endValue - b) * (calculateMembership(endValue) - calculateMembership(beggingValue))) / 2;
-        float pp = (endValue-end);
+        float pp = (endValue - this.b);
+        return tp + pp;
+    }
 
-        return tp+pp;
+    @Override
+    public float getRange() {
+        return maximumValue - minimumValue;
     }
 }

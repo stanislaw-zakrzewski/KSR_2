@@ -5,10 +5,14 @@ import model.membership_functions.MembershipFunction;
 public class MembershipFunctionLClass implements MembershipFunction {
     private float a;
     private float b;
+    private float minimumValue;
+    private float maximumValue;
 
-    public MembershipFunctionLClass(float a, float b) {
+    public MembershipFunctionLClass(float a, float b, float minimumValue, float maximumValue) {
         this.a = a;
         this.b = b;
+        this.minimumValue = minimumValue;
+        this.maximumValue = maximumValue;
     }
 
     @Override
@@ -25,6 +29,11 @@ public class MembershipFunctionLClass implements MembershipFunction {
 
     @Override
     public float getIntegralValue(float beggingValue, float endValue) {
-        return 0;//TODO
+        return 0; //TODO
+    }
+
+    @Override
+    public float getRange() {
+        return maximumValue - minimumValue;
     }
 }

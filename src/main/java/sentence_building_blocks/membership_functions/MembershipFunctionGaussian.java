@@ -4,30 +4,39 @@ import model.membership_functions.MembershipFunction;
 import org.apache.commons.math3.special.Erf;
 
 public class MembershipFunctionGaussian implements MembershipFunction {
-    private float width;
-    private float middle;
+    private float a;
+    private float b;
+    private float minimumValue;
+    private float maximumValue;
 
-    public MembershipFunctionGaussian(float width, float middle) {
-        this.width = width;
-        this.middle = middle;
+    public MembershipFunctionGaussian(float a, float b, float minimumValue, float maximumValue) {
+        this.a = a;
+        this.b = b;
+        this.minimumValue = minimumValue;
+        this.maximumValue = maximumValue;
     }
 
     @Override
     public float calculateMembership(float value) {
-        return (float) Math.exp(-(Math.pow(((value - middle) / width), 2)));
+        return (float) Math.exp(-(Math.pow(((value - b) / a), 2)));
     }
 
     @Override
-    public float getSupport(float beggingValue, float endValue) {
-        float x = (width + middle) / 4;
-        return (middle + x) - (middle - x);
+    public float getSupport(float beggingValue, float endValue) {//TODO check
+        float x = (a + b) / 4;
+        return (b + x) - (b - x);
     }
 
     @Override
-    public float getIntegralValue(float beggingValue, float endValue) {
-        //całka dla konca-całka dla początka
-        double end = -0.5 * Math.sqrt(Math.PI) * middle * Erf.erf((middle - endValue) / width);
-        double beg = -0.5 * Math.sqrt(Math.PI) * middle * Erf.erf((middle - beggingValue) / width);
+    public float getIntegralValue(float beggingValue, float endValue) {//TODO check
+        double end = -0.5 * Math.sqrt(Math.PI) * b * Erf.erf((b - endValue) / a);
+        double beg = -0.5 * Math.sqrt(Math.PI) * b * Erf.erf((b - beggingValue) / a);
+
         return (float) (end - beg);
+    }
+
+    @Override
+    public float getRange() {
+        return maximumValue - minimumValue;
     }
 }

@@ -3,45 +3,54 @@ package sentence_building_blocks.membership_functions;
 import model.membership_functions.MembershipFunction;
 
 public class MembershipFunctionTrapezoidal implements MembershipFunction {
-    private float begging;
-    private float beggingTop;
-    private float endTop;
-    private float end;
+    private float a;
+    private float b;
+    private float c;
+    private float d;
+    private float minimumValue;
+    private float maximumValue;
 
-    public MembershipFunctionTrapezoidal(float begging, float beggingTop, float endTop, float end) {
-        this.begging = begging;
-        this.beggingTop = beggingTop;
-        this.endTop = endTop;
-        this.end = end;
+    public MembershipFunctionTrapezoidal(float a, float b, float c, float d, float minimumValue, float maximumValue) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.d = d;
+        this.minimumValue = minimumValue;
+        this.maximumValue = maximumValue;
     }
 
     @Override
     public float calculateMembership(float value) {
-        if (value <= begging) return 0;
-        else if (begging < value && value <= beggingTop) return ((value - begging) / (beggingTop - begging));
-        else if (beggingTop < value && value <= endTop) return 1;
-        else if (endTop < value && value <= end) return ((end - value) / (end - endTop));
+        if (value <= a) return 0;
+        else if (a < value && value <= b) return ((value - a) / (b - a));
+        else if (b < value && value <= c) return 1;
+        else if (c < value && value <= d) return ((d - value) / (d - c));
         else return 0;
     }
 
     @Override
-    public float getSupport(float beggingValue, float endValue) {
+    public float getSupport(float beggingValue, float endValue) {//TODO check
         float b, e;
-        if (beggingValue > begging) b = beggingValue;
-        else b = begging;
-        if (endValue < end) e = endValue;
-        else e = end;
+        if (beggingValue > a) b = beggingValue;
+        else b = a;
+        if (endValue < d) e = endValue;
+        else e = d;
         return e - b;
     }
 
     @Override
-    public float getIntegralValue(float beggingValue, float endValue) {
+    public float getIntegralValue(float beggingValue, float endValue) {//TODO check
         float b, e;
-        if (beggingValue > begging) b = beggingValue;
-        else b = begging;
-        if (endValue < end) e = endValue;
-        else e = end;
+        if (beggingValue > a) b = beggingValue;
+        else b = a;
+        if (endValue < d) e = endValue;
+        else e = d;
 
-        return ((endTop - beggingTop) + (e - b)) / 2;
+        return ((c - this.b) + (e - b)) / 2;
+    }
+
+    @Override
+    public float getRange() {
+        return maximumValue - minimumValue;
     }
 }

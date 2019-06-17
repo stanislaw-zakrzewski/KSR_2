@@ -3,41 +3,50 @@ package sentence_building_blocks.membership_functions;
 import model.membership_functions.MembershipFunction;
 
 public class MembershipFunctionTriangular implements MembershipFunction {
-    private float beginning;
-    private float middle;
-    private float end;
+    private float a;
+    private float b;
+    private float c;
+    private float minimumValue;
+    private float maximumValue;
 
-    public MembershipFunctionTriangular(float beginning, float middle, float end) {
-        this.beginning = beginning;
-        this.middle = middle;
-        this.end = end;
+    public MembershipFunctionTriangular(float a, float b, float c, float minimumValue, float maximumValue) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.minimumValue = minimumValue;
+        this.maximumValue = maximumValue;
     }
 
     @Override
     public float calculateMembership(float value) {
-        if (value <= beginning) return 0;
-        else if (beginning < value && value <= middle) return ((value - beginning) / (middle - beginning));
-        else if (middle < value && value <= end) return ((end - value) / (end - middle));
+        if (value <= a) return 0;
+        else if (a < value && value <= b) return ((value - a) / (b - a));
+        else if (b < value && value <= c) return ((c - value) / (c - b));
         else return 0;
     }
 
     @Override
-    public float getSupport(float beggingValue, float endValue) {
+    public float getSupport(float beggingValue, float endValue) {//TODO check
         float b, e;
-        if (beggingValue > beginning) b = beggingValue;
-        else b = beginning;
-        if (endValue < end) e = endValue;
-        else e = end;
+        if (beggingValue > a) b = beggingValue;
+        else b = a;
+        if (endValue < c) e = endValue;
+        else e = c;
         return e - b;
     }
 
     @Override
-    public float getIntegralValue(float beggingValue, float endValue) {
+    public float getIntegralValue(float beggingValue, float endValue) {//TODO check
         float b, e;
-        if (beggingValue > beginning) b = beggingValue;
-        else b = beginning;
-        if (endValue < end) e = endValue;
-        else e = end;
-        return ((e - b)*(calculateMembership(middle) - 0))/2;
+        if (beggingValue > a) b = beggingValue;
+        else b = a;
+        if (endValue < c) e = endValue;
+        else e = c;
+        return ((e - b) * (calculateMembership(this.b) - 0)) / 2;
+    }
+
+    @Override
+    public float getRange() {
+        return maximumValue - minimumValue;
     }
 }
