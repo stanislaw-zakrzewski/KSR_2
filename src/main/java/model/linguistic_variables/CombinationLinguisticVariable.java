@@ -1,9 +1,7 @@
 package model.linguistic_variables;
 
-import lombok.Setter;
 import model.FuzzySet;
 
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,8 +12,6 @@ public class CombinationLinguisticVariable {
     private CombinationLinguisticVariable b;
     private Conjunctions conjunction;
     private FuzzySet fuzzySet;
-    @Setter
-    private List<Float> values;
 
 
     public CombinationLinguisticVariable(LinguisticVariable s, String sLabel) {
@@ -45,15 +41,9 @@ public class CombinationLinguisticVariable {
     }
 
     public int getSSize() {
-        if(a == null) {
+        if (a == null) {
             return fuzzySet.getSize();
         } else return a.getSSize();
-    }
-
-    public float getCardinality() {
-        float cardinality = 0;
-
-        return cardinality;
     }
 
     public List<FuzzySet> getFuzzySets() {

@@ -21,13 +21,6 @@ public class KSentence implements Sentence {
         this.w = w;
     }
 
-    public void process(List<Float> x) {
-        s.setValues(x);
-        s.getFuzzySet();
-        w.setValues(x);
-        w.getFuzzySet();
-    }
-
     public float getCombinedSWCardinality() {
         float value = 0;
         for (int i = 0; i < s.getFuzzySet().getMemberships().size(); i++) {
@@ -43,7 +36,8 @@ public class KSentence implements Sentence {
     public float getWSCombinedSupp() {
         float value = 0;
         for (int i = 0; i < s.getFuzzySet().getSize(); i++) {
-            if (s.getFuzzySet().getMembershipForElement(i) > 0 && w.getFuzzySet().getMembershipForElement(i) > 0) value += 1;
+            if (s.getFuzzySet().getMembershipForElement(i) > 0 && w.getFuzzySet().getMembershipForElement(i) > 0)
+                value += 1;
         }
         return value;
     }
@@ -68,8 +62,8 @@ public class KSentence implements Sentence {
     @Override
     public String toString() {
         String sentence = q.getName();
-        if(q.isAbsolute()) {
-            sentence += " "  + q.getValue();
+        if (q.isAbsolute()) {
+            sentence += " " + q.getValue();
         }
         return sentence + " lotów, które są " + w.toString() + " jest " + s.toString();
     }

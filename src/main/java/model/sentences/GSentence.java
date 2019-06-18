@@ -7,7 +7,7 @@ import model.linguistic_variables.CombinationLinguisticVariable;
 
 import java.util.List;
 
-public class GSentence implements Sentence{
+public class GSentence implements Sentence {
     @Getter
     private LinguisticQuantifier q;
     @Getter
@@ -38,8 +38,8 @@ public class GSentence implements Sentence{
     @Override
     public String toString() {
         String sentence = q.getName();
-        if(q.isAbsolute()) {
-            sentence += " "  + q.getValue();
+        if (q.isAbsolute()) {
+            sentence += " " + q.getValue();
         }
         return sentence + " lotów jest " + s.toString();
     }

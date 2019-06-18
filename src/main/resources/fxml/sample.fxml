@@ -71,7 +71,7 @@
                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                          </rowConstraints>
                                           <children>
-                                             <Label prefHeight="20.0" prefWidth="203.0" text="Ocena jakości podsumowania" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                             <Label prefHeight="20.0" prefWidth="200.0" text="Ocena jakości podsumowania" textAlignment="RIGHT" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                                 <font>
                                                    <Font name="System Bold" size="14.0" />
                                                 </font>
@@ -223,7 +223,7 @@
                                   <TableView fx:id="viewSentences" prefHeight="372.0" prefWidth="1200.0">
                                       <columns>
                                           <TableColumn fx:id="sentence" prefWidth="1062.0" text="Zdanie" />
-                                          <TableColumn fx:id="accuracy" prefWidth="137.0" text="Prawdziwość" />
+                                          <TableColumn fx:id="accuracy" prefWidth="137.0" text="Jakość podsumowania" />
                                       </columns>
                                   </TableView>
                               </children>

@@ -6,7 +6,7 @@ public class T3_DegreeOfCovering implements QualityMeasurement {
 
     @Override
     public float calculateValue(Sentence sentence) {
-        float value = 0;
+        float value;
         if (sentence.getType() == SentenceType.K) {
             KSentence kSentence = (KSentence) sentence;
             value = kSentence.getWSCombinedSupp() / kSentence.getWCombinedSupp();

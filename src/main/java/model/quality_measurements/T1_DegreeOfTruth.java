@@ -13,7 +13,7 @@ public class T1_DegreeOfTruth implements QualityMeasurement {
         switch (sentence.getType()) {
             case Y:
                 YSentence ySentence = (YSentence) sentence;
-                if(ySentence.getQ().isAbsolute()) {
+                if (ySentence.getQ().isAbsolute()) {
                     value = ySentence.getQ().calculateMembership(ySentence.getSFuzzySet().getCardinality());
                 } else {
                     value = ySentence.getQ().calculateMembership(ySentence.getSFuzzySet().getCardinality() / ySentence.getSFuzzySet().getSize());
@@ -21,7 +21,7 @@ public class T1_DegreeOfTruth implements QualityMeasurement {
                 break;
             case G:
                 GSentence gSentence = (GSentence) sentence;
-                if(gSentence.getQ().isAbsolute()) {
+                if (gSentence.getQ().isAbsolute()) {
                     value = gSentence.getQ().calculateMembership(gSentence.getCombinedSCardinality());
                 } else {
                     value = gSentence.getQ().calculateMembership(gSentence.getCombinedSCardinality() / gSentence.getSSize());
@@ -29,7 +29,7 @@ public class T1_DegreeOfTruth implements QualityMeasurement {
                 break;
             case K:
                 KSentence kSentence = (KSentence) sentence;
-                if(kSentence.getQ().isAbsolute()) {
+                if (kSentence.getQ().isAbsolute()) {
                     value = kSentence.getQ().calculateMembership(kSentence.getCombinedSWCardinality());
                 } else {
                     value = kSentence.getQ().calculateMembership(kSentence.getCombinedSWCardinality() / kSentence.getCombinedWCardinality());

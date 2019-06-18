@@ -45,10 +45,8 @@ public class GSentenceGenerator {
                         for (String label1 : lv1.getLabels()) {
                             for (String label2 : lv2.getLabels()) {
                                 CombinationLinguisticVariable clv1 = new CombinationLinguisticVariable(lv1, label1);
-                                clv1.setValues(x1);
                                 clv1.process(x1);
                                 CombinationLinguisticVariable clv2 = new CombinationLinguisticVariable(lv2, label2);
-                                clv2.setValues(x2);
                                 clv2.process(x2);
                                 sentences.add(new GSentence(lq, new CombinationLinguisticVariable(clv1, clv2, Conjunctions.AND)));
                                 sentences.add(new GSentence(lq, new CombinationLinguisticVariable(clv1, clv2, Conjunctions.OR)));

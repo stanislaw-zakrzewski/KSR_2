@@ -21,14 +21,14 @@ public class T8_DegreeOfSummarizerCardinality implements QualityMeasurement {
                 for (FuzzySet fs : gSentence.getSFuzzySets()) {
                     value *= (fs.getMembershipFunction().getIntegralValue() / fs.getMembershipFunction().getRange());
                 }
-                value = 1 - (float) Math.pow(value, 1 / gSentence.getSFuzzySets().size());
+                value = 1 - (float) Math.pow(value, 1.f / gSentence.getSFuzzySets().size());
                 break;
             case K:
                 KSentence kSentence = (KSentence) sentence;
                 for (FuzzySet fs : kSentence.getSFuzzySets()) {
                     value *= (fs.getMembershipFunction().getIntegralValue() / fs.getMembershipFunction().getRange());
                 }
-                value = 1 - (float) Math.pow(value, 1 / kSentence.getSFuzzySets().size());
+                value = 1 - (float) Math.pow(value, 1.f / kSentence.getSFuzzySets().size());
                 break;
         }
         return value;
