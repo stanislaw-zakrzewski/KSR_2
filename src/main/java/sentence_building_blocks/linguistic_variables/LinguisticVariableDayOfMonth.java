@@ -17,8 +17,8 @@ class LinguisticVariableDayOfMonth extends LinguisticVariable {
         column = "day_of_month";
         labels = Arrays.asList("lotami, które odbyły się na początku miesiąca", "lotami, które odbyły się w połowie miesiąca", "lotami, które odbyły się pod koniec miesiąca");
         membershipFunctions = new HashMap<>();
-        membershipFunctions.put(labels.get(0), new MembershipFunctionLClass(3, 6, min, max));
-        membershipFunctions.put(labels.get(1), new MembershipFunctionTrapezoidal(11, 14, 17, 20, min, max));
-        membershipFunctions.put(labels.get(2), new MembershipFunctionGammaClass(25, 29, min, max));
+        membershipFunctions.put(labels.get(0), new MembershipFunctionLClass(4, 14, min, max));
+        membershipFunctions.put(labels.get(1), new MembershipFunctionTrapezoidal(4, 14, 17, 28, min, max));
+        membershipFunctions.put(labels.get(2), new MembershipFunctionGammaClass(17, 28, min, max));
     }
 }

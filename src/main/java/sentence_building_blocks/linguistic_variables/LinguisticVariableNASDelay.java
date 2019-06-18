@@ -17,8 +17,8 @@ class LinguisticVariableNASDelay extends LinguisticVariable {
         column = "nas_delay";
         labels = Arrays.asList("lotami o małym spoźnieniu spowodowanym przez NAS", "lotami o średnim spoźnieniu spowodowanym przez przewodnika", "lotami o dużym spoźnieniu spowodowanym przez NAS");
         membershipFunctions = new HashMap<>();
-        membershipFunctions.put(labels.get(0), new MembershipFunctionLClass(90, 120, min, max));
-        membershipFunctions.put(labels.get(1), new MembershipFunctionTrapezoidal(100, 140, 300, 340, min, max));
-        membershipFunctions.put(labels.get(2), new MembershipFunctionGammaClass(320, 370, min, max));
+        membershipFunctions.put(labels.get(0), new MembershipFunctionLClass(30, 40, min, max));
+        membershipFunctions.put(labels.get(1), new MembershipFunctionTrapezoidal(30, 40, 200, 240, min, max));
+        membershipFunctions.put(labels.get(2), new MembershipFunctionGammaClass(220, 270, min, max));
     }
 }

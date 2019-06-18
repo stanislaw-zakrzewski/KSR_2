@@ -17,8 +17,8 @@ class LinguisticVariableWeatherDelay extends LinguisticVariable {
         column = "weather_delay";
         labels = Arrays.asList("lotami o małym spoźnieniu spowodowanym przez pogodę", "lotami o średnim spoźnieniu spowodowanym przez pogodę", "lotami o dużym spoźnieniu spowodowanym przez pogodę");
         membershipFunctions = new HashMap<>();
-        membershipFunctions.put(labels.get(0), new MembershipFunctionLClass(240, 260, min, max));
-        membershipFunctions.put(labels.get(1), new MembershipFunctionTrapezoidal(230, 270, 540, 620, min, max));
-        membershipFunctions.put(labels.get(2), new MembershipFunctionGammaClass(600, 800, min, max));
+        membershipFunctions.put(labels.get(0), new MembershipFunctionLClass(55, 65, min, max));
+        membershipFunctions.put(labels.get(1), new MembershipFunctionTrapezoidal(55, 75, 400, 450, min, max));
+        membershipFunctions.put(labels.get(2), new MembershipFunctionGammaClass(400, 500, min, max));
     }
 }

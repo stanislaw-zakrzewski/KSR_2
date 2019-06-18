@@ -17,7 +17,7 @@ class LinguisticVariableArriveDelay extends LinguisticVariable {
         column = "arr_delay";
         labels = Arrays.asList("lotami o spóźnionym przylocie", "lotami o bardzo spóźnionym przylocie");
         membershipFunctions = new HashMap<>();
-        membershipFunctions.put(labels.get(0), new MembershipFunctionLClass(25, 35, min, max));
-        membershipFunctions.put(labels.get(1), new MembershipFunctionGammaClass(25, 35, min, max));
+        membershipFunctions.put(labels.get(0), new MembershipFunctionLClass(60, 80, min, max));
+        membershipFunctions.put(labels.get(1), new MembershipFunctionGammaClass(60, 80, min, max));
     }
 }

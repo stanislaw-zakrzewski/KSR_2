@@ -17,8 +17,8 @@ class LinguisticVariableSecurityDelay extends LinguisticVariable {
         column = "security_delay";
         labels = Arrays.asList("lotami o małym spoźnieniu spowodowanym przez względy bezpieczeństwa", "lotami o średnim spoźnieniu spowodowanym przez względy bezpieczeństwa", "lotami o dużym spoźnieniu spowodowanym przez względy bezpieczeństwa");
         membershipFunctions = new HashMap<>();
-        membershipFunctions.put(labels.get(0), new MembershipFunctionLClass(7, 9, min, max));
-        membershipFunctions.put(labels.get(1), new MembershipFunctionTrapezoidal(8, 12, 20, 23, min, max));
-        membershipFunctions.put(labels.get(2), new MembershipFunctionGammaClass(21, 30, min, max));
+        membershipFunctions.put(labels.get(0), new MembershipFunctionLClass(15, 20, min, max));
+        membershipFunctions.put(labels.get(1), new MembershipFunctionTrapezoidal(15, 25, 35, 45, min, max));
+        membershipFunctions.put(labels.get(2), new MembershipFunctionGammaClass(35, 50, min, max));
     }
 }
