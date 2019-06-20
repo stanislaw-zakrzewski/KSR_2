@@ -50,7 +50,7 @@ public class Controller implements Initializable {
     @FXML
     public TextArea fileName, w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, xValue;
     @FXML
-    public TextField a_1, a_2, a_3, a_4, a_5, a_6, b_1, b_2, b_3, b_4, b_5, b_6, c_1, c_2, c_4, d_2;
+    public TextField a_1, a_2, a_3, a_4, a_5, a_6, b_1, b_2, b_3, b_4, b_5, b_6, c_1, c_2, c_4, d_2, a_7, b_7;
 
     @FXML
     public TableView<ViewSentence> viewSentences;
@@ -58,7 +58,7 @@ public class Controller implements Initializable {
     public TableColumn<ViewSentence, String> accuracy;
 
     @FXML
-    public CheckBox t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, typeY, typeG, typeK, f1, f2, f3, f4, f5, f6;
+    public CheckBox t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, typeY, typeG, typeK, f1, f2, f3, f4, f5, f6, f7;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -141,6 +141,9 @@ public class Controller implements Initializable {
         }
         if (f5.isSelected()) {
             membershipFunction = new MembershipFunctionGammaClass(Float.parseFloat(a_5.getText()), Float.parseFloat(b_5.getText()),0,1);
+        }
+        if (f7.isSelected()) {
+            membershipFunction = new MembershipFunctionLClass(Float.parseFloat(a_7.getText()), Float.parseFloat(b_7.getText()), 0, 1);
         }
         if (membershipFunction != null) {
             setFunction(membershipFunction);
