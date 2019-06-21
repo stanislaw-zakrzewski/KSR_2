@@ -17,6 +17,6 @@ class LinguisticVariableDepartureDelay extends LinguisticVariable {
         labels = Arrays.asList("lotami o spóźnionym odlocie", "lotami o bardzo spóźnionym odlocie");
         membershipFunctions = new HashMap<>();
         membershipFunctions.put(labels.get(0), new MembershipFunctionLClass(60, 80, min, max));
-        membershipFunctions.put(labels.get(1), new MembershipFunctionGammaClass(80, 60, min, max));
+        membershipFunctions.put(labels.get(1), new MembershipFunctionGammaClass(60, 80, min, max));
     }
 }

@@ -3,7 +3,6 @@ package sentence_building_blocks.linguistic_variables;
 import model.linguistic_variables.LinguisticVariable;
 import sentence_building_blocks.membership_functions.MembershipFunctionGammaClass;
 import sentence_building_blocks.membership_functions.MembershipFunctionLClass;
-import sentence_building_blocks.membership_functions.MembershipFunctionTrapezoidal;
 
 import java.util.Arrays;
 import java.util.HashMap;
