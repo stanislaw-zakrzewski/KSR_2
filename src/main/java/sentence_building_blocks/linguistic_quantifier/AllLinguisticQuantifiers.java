@@ -20,8 +20,8 @@ public class AllLinguisticQuantifiers {
         linguisticQuantifiers.add(new LinguisticQuantifierRelative("ponad połowa", new MembershipFunctionGammaClass(0.4f, 0.5f, min, max)));
         linguisticQuantifiers.add(new LinguisticQuantifierRelative("mniej niż połowa", new MembershipFunctionLClass(0.5f, 0.6f, min, max)));
         linguisticQuantifiers.add(new LinguisticQuantifierRelative("około połowy", new MembershipFunctionGaussian(0.2f, 0.5f, min, max)));
-        linguisticQuantifiers.add(new LinguisticQuantifierAbsolute("mniej niż", new MembershipFunctionTrapezoidal(0, 0.001f, X, X * 1.1f, min, maxAbsolute), X));
-        linguisticQuantifiers.add(new LinguisticQuantifierAbsolute("więcej niż", new MembershipFunctionGammaClass(X * 0.9f, X, min, maxAbsolute), X));
+        linguisticQuantifiers.add(new LinguisticQuantifierAbsolute("mniej niż", new MembershipFunctionLClass(X * 0.9f, X * 1.1f, min, maxAbsolute), X));
+        linguisticQuantifiers.add(new LinguisticQuantifierAbsolute("więcej niż", new MembershipFunctionGammaClass(X * 0.9f, X * 1.1f, min, maxAbsolute), X));
         linguisticQuantifiers.add(new LinguisticQuantifierAbsolute("około", new MembershipFunctionGaussian(X * 0.1f, X, min, maxAbsolute), X));
     }
 }
